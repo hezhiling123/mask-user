@@ -1,20 +1,20 @@
 package cn.mask.mask.user.api.user.service;
 
-import cn.mask.mask.user.api.login.dto.UserInfo;
+import cn.mask.mask.user.api.login.dto.WeiXinUserInfo;
 
 public interface UserService {
     /**
      * 创建系统用户
      *
-     * @param userInfo  用户信息 {@link UserInfo}
+     * @param WeiXinUserInfo  用户信息 {@link WeiXinUserInfo}
      */
-    void addUser(UserInfo userInfo);
+    void addUser(WeiXinUserInfo WeiXinUserInfo);
 
     /**
      *  根据用户id查询用户信息
      *
      * @param userId    用户id
-     * @return  用户信息 {@link UserInfo}
+     * @return  用户信息 {@link WeiXinUserInfo}
      */
-    UserInfo getUserByUserId(String userId);
+    WeiXinUserInfo getUserByUserId(String userId);
 }
