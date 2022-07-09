@@ -1,8 +1,8 @@
 package cn.mask.mask.user.dubbo.common.exception;
 
-import cn.mask.core.framework.web.WrapperResponse;
-import cn.mask.core.framework.web.exception.MaskException;
-import cn.mask.core.framework.web.exception.ResultStatusCode;
+import cn.mask.mask.common.core.framework.web.WrapperResponse;
+import cn.mask.mask.common.core.framework.web.exception.MaskException;
+import cn.mask.mask.common.core.framework.web.exception.ResultStatusCode;
 import org.springframework.core.annotation.Order;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
