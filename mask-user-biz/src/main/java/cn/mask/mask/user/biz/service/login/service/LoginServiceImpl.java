@@ -2,17 +2,16 @@ package cn.mask.mask.user.biz.service.login.service;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
-import cn.mask.core.framework.utils.CommonConstant;
-import cn.mask.core.framework.utils.MD5Util;
-import cn.mask.core.framework.utils.response.ResponseCodeConstant;
-import cn.mask.core.framework.web.WrapperResponse;
-import cn.mask.core.framework.web.exception.MaskException;
-import cn.mask.core.framework.web.exception.ResultStatusCode;
+import cn.mask.mask.common.core.framework.web.WrapperResponse;
+import cn.mask.mask.common.core.framework.web.constant.ResponseCodeConstant;
+import cn.mask.mask.common.core.framework.web.exception.MaskException;
+import cn.mask.mask.common.core.framework.web.exception.ResultStatusCode;
 import cn.mask.mask.model.user.po.UserPO;
 import cn.mask.mask.user.api.login.dto.WeiXinUserInfo;
 import cn.mask.mask.user.api.login.dto.WinXinLoginInfo;
 import cn.mask.mask.user.api.login.service.LoginService;
 import cn.mask.mask.user.api.user.dto.UserDTO;
+import cn.mask.mask.user.biz.common.constant.CommonConstant;
 import cn.mask.mask.user.biz.service.user.dao.UserMapper;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
@@ -106,7 +105,7 @@ public class LoginServiceImpl implements LoginService {
         password = new String(usernamePasswordToken.getPassword());
         log.info(password);
         paramMap.put("loginAccount", loginAccount);
-        String md5Password = MD5Util.generateMD5(password, "1");
+//        String md5Password = MD5Util.generateMD5(password, "1");
         checkUserStatus(user);
         return null;
     }

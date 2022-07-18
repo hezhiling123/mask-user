@@ -10,12 +10,7 @@ import java.util.Stack;
 public class DBContextHolder {
     /*保存系统中存在的数据源的标识符，然后通过该标识符定位到实际的数据源实体*/
     private static final ThreadLocal<Stack<DBTypeEnum>> contextHolderStack
-            = new ThreadLocal<Stack<DBTypeEnum>>() {
-        @Override
-        protected Stack<DBTypeEnum> initialValue() {
-            return new Stack<DBTypeEnum>();
-        }
-    };
+            = ThreadLocal.withInitial(() -> new Stack<DBTypeEnum>());
 
 
     private static final ThreadLocal<DBTypeEnum> contextHolder

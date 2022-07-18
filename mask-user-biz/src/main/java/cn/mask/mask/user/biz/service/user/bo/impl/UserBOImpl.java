@@ -2,7 +2,7 @@ package cn.mask.mask.user.biz.service.user.bo.impl;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
-import cn.mask.core.framework.utils.CommonConstant;
+import cn.mask.mask.user.biz.common.constant.CommonConstant;
 import cn.mask.mask.user.biz.service.user.bo.UserBO;
 import cn.mask.mask.user.biz.service.user.dao.UserMapper;
 import cn.mask.mask.user.biz.service.user.pojo.dto.UserDTO;

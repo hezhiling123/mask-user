@@ -15,7 +15,6 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "com.mask.**.dao", sqlSessionFactoryRef = "sqlSessionFactory")
 public class MySQLDataSourceConfig {
 
     @Bean(name = "dataSource")

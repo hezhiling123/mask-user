@@ -1,10 +1,9 @@
 package cn.mask.mask.user.dubbo;
-
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MaskUserDubboApplicationTests {
+class MaskUserPODubboApplicationTests {
 
     @Test
     void contextLoads() {

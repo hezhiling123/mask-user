@@ -122,7 +122,7 @@ public class DruidConfig {
      */
     @Bean
     public ServletRegistrationBean druidStateViewServlet() {
-        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
+        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean();
         //初始化参数initParams
         //添加白名单
         servletRegistrationBean.addInitParameter("allow", "");
@@ -143,7 +143,7 @@ public class DruidConfig {
      */
     @Bean
     public FilterRegistrationBean druidStatFilter() {
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new WebStatFilter());
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         //添加过滤规则
         filterRegistrationBean.addUrlPatterns("/*");
         //添加不需要忽略的格式信息

@@ -4,13 +4,12 @@ import cn.mask.mask.user.dubbo.dao.Oauth2ClientMapper;
 import io.github.yedaxia.apidocs.ApiDoc;
 import cn.mask.mask.user.api.authorize.dto.Oauth2Client;
 import cn.mask.mask.user.api.authorize.service.AuthorizeService;
-import org.apache.dubbo.config.annotation.DubboService;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -22,7 +21,7 @@ import java.util.Map;
 @RestController
 @ApiDoc
 @RequestMapping("/user/sys/service/authorize")
-@DubboService(group = "dev", version = "1.0.0")
+@Service(interfaceName = "authorizeService")
 public class AuthorizeServiceImpl implements AuthorizeService {
 
     @Autowired

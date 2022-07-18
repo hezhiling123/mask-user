@@ -1,6 +1,6 @@
 package cn.mask.mask.user.biz.common.http.response;
 
-import cn.mask.core.framework.web.WrapperResponse;
+import cn.mask.mask.common.core.framework.web.WrapperResponse;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;

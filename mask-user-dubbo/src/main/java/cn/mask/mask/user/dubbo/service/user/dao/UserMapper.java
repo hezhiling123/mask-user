@@ -1,7 +1,9 @@
 package cn.mask.mask.user.dubbo.service.user.dao;
 
 import cn.mask.mask.user.dubbo.service.user.pojo.po.UserPO;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(String userId);
 
