@@ -52,7 +52,7 @@ spring:
 
 dubbo:
   scan:
-    base-packages: cn.mask.mask.user.dubbo
+    base-packages: cn.mask.mask.user.dubbo.service
   protocol:
     name: dubbo
     port: 28080

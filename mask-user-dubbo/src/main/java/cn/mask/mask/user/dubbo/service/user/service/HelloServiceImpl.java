@@ -3,9 +3,7 @@ package cn.mask.mask.user.dubbo.service.user.service;
 import cn.mask.mask.common.core.framework.web.WrapperResponse;
 import cn.mask.mask.user.api.user.service.IHelloService;
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RequestMapping("/test")
 @RestController
-@Service(interfaceName = "hello-service")
-public class TestServiceImpl implements IHelloService {
+@Service
+public class HelloServiceImpl implements IHelloService {
 
     @GetMapping("/test")
     public String test() {
