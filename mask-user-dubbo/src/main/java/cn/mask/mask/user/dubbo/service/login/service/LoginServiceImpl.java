@@ -8,14 +8,16 @@ import cn.mask.mask.common.core.framework.web.exception.MaskException;
 import cn.mask.mask.common.core.framework.web.exception.ResultStatusCode;
 import cn.mask.mask.model.user.po.UserPO;
 import cn.mask.mask.user.api.login.dto.WeiXinUserInfo;
-import cn.mask.mask.user.api.login.dto.WinXinLoginInfo;
+import cn.mask.mask.user.api.login.dto.WeiXinLoginInfo;
 import cn.mask.mask.user.api.login.service.LoginService;
 import cn.mask.mask.user.api.user.dto.UserDTO;
 import cn.mask.mask.user.dubbo.common.constant.CommonConstant;
+import cn.mask.mask.user.dubbo.service.user.bo.UserBO;
 import cn.mask.mask.user.dubbo.service.user.dao.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,17 +39,21 @@ public class LoginServiceImpl implements LoginService {
     @Resource
     private WxMaService wxService;
 
+    @Resource
+    private UserBO userBO;
+
     /**
      * 微信登录
      *
-     * @param winXinLoginInfo 请求内容，{ code: xxx, userInfo: xxx }
+     * @param weiXinLoginInfo 请求内容，{ code: xxx, userInfo: xxx }
      * @return 登录结果
      **/
     @Override
     @PostMapping("loginByWeiXin")
-    public WrapperResponse<UserDTO> loginByWeiXin(@RequestBody WinXinLoginInfo winXinLoginInfo) throws MaskException {
-        String code = winXinLoginInfo.getCode();
-        WeiXinUserInfo WeiXinUserInfo = winXinLoginInfo.getWeiXinUserInfo();
+    @Transactional
+    public WrapperResponse<UserDTO> loginByWeiXin(@RequestBody WeiXinLoginInfo weiXinLoginInfo) throws MaskException {
+        String code = weiXinLoginInfo.getCode();
+        WeiXinUserInfo WeiXinUserInfo = weiXinLoginInfo.getWeiXinUserInfo();
         log.info(code);
         log.info(WeiXinUserInfo.toString());
         if (code == null) {

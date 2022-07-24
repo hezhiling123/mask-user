@@ -39,15 +39,15 @@ public class UserBOImpl implements UserBO {
         BeanUtils.copyProperties(userDTO, userPO);
         return UserPO.builder()
                 .userId("1")
-                .avatar("1")
+                .avatarUrl("1")
                 .status(CommonConstant.USER_STATUS_NO_ACTIVATION)
                 .gender(ObjectUtil.isNull(userPO.getGender()) ? 0 : userPO.getGender())
-                .creatorName("system")
-                .creatorId("system")
-                .createTime(new DateTime())
-                .updaterId("system")
-                .updaterName("register")
-                .updateTime(new DateTime())
+                .crterName("system")
+                .crterId("system")
+                .crteTime(new DateTime())
+                .updterId("system")
+                .updterName("register")
+                .updtTime(new DateTime())
                 .build();
     }
 }

@@ -29,10 +29,10 @@
         <!-- 类型转换 -->
         <javaTypeResolver>
             <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
-            <property name="forceBigDecimals" value="false"/>
+            <property name="forceBigDecimals" value="true"/>
         </javaTypeResolver>
         <!-- 生成实体类地址 -->
-        <javaModelGenerator targetPackage="cn.mask.mask.user.dubbo.service.user.pojo.po" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="cn.mask.mask.user.api.user.dto" targetProject="src/main/java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
             <property name="enableSubPackages" value="true"/>
             <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
@@ -52,7 +52,7 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <table schema="mask" tableName="user" domainObjectName="User"
+        <table schema="mask" tableName="user_identity" domainObjectName="UserIdentityPO"
                enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">

@@ -2,6 +2,8 @@ package cn.mask.mask.user.api.login.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author hezhiling
  * @version 1.0
@@ -12,14 +14,17 @@ public class WeiXinUserInfo {
     /**
      * 昵称
      */
+    @NotBlank(message = "用户昵称不可为空")
     private String nickName;
     /**
      * 性别
      */
+    @NotBlank(message = "性别不可为空")
     private Integer gender;
     /**
      * 语言
      */
+    @NotBlank(message = "语言不可为空")
     private String language;
     /**
      * 城市

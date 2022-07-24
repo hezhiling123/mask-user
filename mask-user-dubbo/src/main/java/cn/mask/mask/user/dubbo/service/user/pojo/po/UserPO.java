@@ -16,25 +16,25 @@ public class UserPO {
 
     private Integer gender;
 
-    private Date birthday;
+    private Date bitrh;
 
     private String tel;
 
-    private String avatar;
+    private String avatarUrl;
 
     private String status;
 
-    private String creatorId;
+    private String crterId;
 
-    private String creatorName;
+    private String crterName;
 
-    private Date createTime;
+    private Date crteTime;
 
-    private String updaterId;
+    private String updterId;
 
-    private String updaterName;
+    private String updterName;
 
-    private Date updateTime;
+    private Date updtTime;
 
     public String getUserId() {
         return userId;
@@ -60,12 +60,12 @@ public class UserPO {
         this.gender = gender;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public Date getBitrh() {
+        return bitrh;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setBitrh(Date bitrh) {
+        this.bitrh = bitrh;
     }
 
     public String getTel() {
@@ -76,12 +76,12 @@ public class UserPO {
         this.tel = tel == null ? null : tel.trim();
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar == null ? null : avatar.trim();
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl == null ? null : avatarUrl.trim();
     }
 
     public String getStatus() {
@@ -92,51 +92,51 @@ public class UserPO {
         this.status = status == null ? null : status.trim();
     }
 
-    public String getCreatorId() {
-        return creatorId;
+    public String getCrterId() {
+        return crterId;
     }
 
-    public void setCreatorId(String creatorId) {
-        this.creatorId = creatorId == null ? null : creatorId.trim();
+    public void setCrterId(String crterId) {
+        this.crterId = crterId == null ? null : crterId.trim();
     }
 
-    public String getCreatorName() {
-        return creatorName;
+    public String getCrterName() {
+        return crterName;
     }
 
-    public void setCreatorName(String creatorName) {
-        this.creatorName = creatorName == null ? null : creatorName.trim();
+    public void setCrterName(String crterName) {
+        this.crterName = crterName == null ? null : crterName.trim();
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCrteTime() {
+        return crteTime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCrteTime(Date crteTime) {
+        this.crteTime = crteTime;
     }
 
-    public String getUpdaterId() {
-        return updaterId;
+    public String getUpdterId() {
+        return updterId;
     }
 
-    public void setUpdaterId(String updaterId) {
-        this.updaterId = updaterId == null ? null : updaterId.trim();
+    public void setUpdterId(String updterId) {
+        this.updterId = updterId == null ? null : updterId.trim();
     }
 
-    public String getUpdaterName() {
-        return updaterName;
+    public String getUpdterName() {
+        return updterName;
     }
 
-    public void setUpdaterName(String updaterName) {
-        this.updaterName = updaterName == null ? null : updaterName.trim();
+    public void setUpdterName(String updterName) {
+        this.updterName = updterName == null ? null : updterName.trim();
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getUpdtTime() {
+        return updtTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setUpdtTime(Date updtTime) {
+        this.updtTime = updtTime;
     }
 }

@@ -55,7 +55,7 @@ dubbo:
     base-packages: cn.mask.mask.user.dubbo.service
   protocol:
     name: dubbo
-    port: 28080
+    port: -1
   registry:
     address: spring-cloud://42.192.182.126
 csp:

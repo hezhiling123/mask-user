@@ -2,87 +2,87 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.mask.mask.user.dubbo.service.user.dao.UserMapper">
     <resultMap id="BaseResultMap" type="cn.mask.mask.user.dubbo.service.user.pojo.po.UserPO">
-        <id column="user_id" jdbcType="VARCHAR" property="userId"/>
-        <result column="username" jdbcType="VARCHAR" property="username"/>
-        <result column="gender" jdbcType="INTEGER" property="gender"/>
-        <result column="birthday" jdbcType="DATE" property="birthday"/>
-        <result column="tel" jdbcType="VARCHAR" property="tel"/>
-        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
-        <result column="status" jdbcType="VARCHAR" property="status"/>
-        <result column="creator_id" jdbcType="VARCHAR" property="creatorId"/>
-        <result column="creator_name" jdbcType="VARCHAR" property="creatorName"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="updater_id" jdbcType="VARCHAR" property="updaterId"/>
-        <result column="updater_name" jdbcType="VARCHAR" property="updaterName"/>
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <id column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+        <result column="USERNAME" jdbcType="VARCHAR" property="username"/>
+        <result column="GENDER" jdbcType="INTEGER" property="gender"/>
+        <result column="BITRH" jdbcType="DATE" property="bitrh"/>
+        <result column="TEL" jdbcType="VARCHAR" property="tel"/>
+        <result column="AVATAR_URL" jdbcType="VARCHAR" property="avatarUrl"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="CRTER_ID" jdbcType="VARCHAR" property="crterId"/>
+        <result column="CRTER_NAME" jdbcType="VARCHAR" property="crterName"/>
+        <result column="CRTE_TIME" jdbcType="TIMESTAMP" property="crteTime"/>
+        <result column="UPDTER_ID" jdbcType="VARCHAR" property="updterId"/>
+        <result column="UPDTER_NAME" jdbcType="VARCHAR" property="updterName"/>
+        <result column="UPDT_TIME" jdbcType="TIMESTAMP" property="updtTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-    user_id, username, gender, birthday, tel, avatar, status, creator_id, creator_name, 
-    create_time, updater_id, updater_name, update_time
+    USER_ID, USERNAME, GENDER, BITRH, TEL, AVATAR_URL, STATUS, CRTER_ID, CRTER_NAME, CRTE_TIME,
+    UPDTER_ID, UPDTER_NAME, UPDT_TIME
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from user
-        where user_id = #{userId,jdbcType=VARCHAR}
+        where USER_ID = #{userId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from user
-    where user_id = #{userId,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="cn.mask.mask.user.dubbo.service.user.pojo.po.UserPO">
-    insert into user (user_id, username, gender, 
-      birthday, tel, avatar, 
-      status, creator_id, creator_name, 
-      create_time, updater_id, updater_name, 
-      update_time)
+    insert into user (USER_ID, USERNAME, GENDER, 
+      BITRH, TEL, AVATAR_URL, STATUS,
+      CRTER_ID, CRTER_NAME, CRTE_TIME, 
+      UPDTER_ID, UPDTER_NAME, UPDT_TIME
+      )
     values (#{userId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, 
-      #{birthday,jdbcType=DATE}, #{tel,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, #{creatorName,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updaterId,jdbcType=VARCHAR}, #{updaterName,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{bitrh,jdbcType=DATE}, #{tel,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+      #{crterId,jdbcType=VARCHAR}, #{crterName,jdbcType=VARCHAR}, #{crteTime,jdbcType=TIMESTAMP}, 
+      #{updterId,jdbcType=VARCHAR}, #{updterName,jdbcType=VARCHAR}, #{updtTime,jdbcType=TIMESTAMP}
+      )
   </insert>
     <insert id="insertSelective" parameterType="cn.mask.mask.user.dubbo.service.user.pojo.po.UserPO">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null">
-                user_id,
+                USER_ID,
             </if>
             <if test="username != null">
-                username,
+                USERNAME,
             </if>
             <if test="gender != null">
-                gender,
+                GENDER,
             </if>
-            <if test="birthday != null">
-                birthday,
+            <if test="bitrh != null">
+                BITRH,
             </if>
             <if test="tel != null">
-                tel,
+                TEL,
             </if>
-            <if test="avatar != null">
-                avatar,
+            <if test="avatarUrl != null">
+                AVATAR_URL,
             </if>
             <if test="status != null">
-                status,
+                STATUS,
             </if>
-            <if test="creatorId != null">
-                creator_id,
+            <if test="crterId != null">
+                CRTER_ID,
             </if>
-            <if test="creatorName != null">
-                creator_name,
+            <if test="crterName != null">
+                CRTER_NAME,
             </if>
-            <if test="createTime != null">
-                create_time,
+            <if test="crteTime != null">
+                CRTE_TIME,
             </if>
-            <if test="updaterId != null">
-                updater_id,
+            <if test="updterId != null">
+                UPDTER_ID,
             </if>
-            <if test="updaterName != null">
-                updater_name,
+            <if test="updterName != null">
+                UPDTER_NAME,
             </if>
-            <if test="updateTime != null">
-                update_time,
+            <if test="updtTime != null">
+                UPDT_TIME,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -95,35 +95,35 @@
             <if test="gender != null">
                 #{gender,jdbcType=INTEGER},
             </if>
-            <if test="birthday != null">
-                #{birthday,jdbcType=DATE},
+            <if test="bitrh != null">
+                #{bitrh,jdbcType=DATE},
             </if>
             <if test="tel != null">
                 #{tel,jdbcType=VARCHAR},
             </if>
-            <if test="avatar != null">
-                #{avatar,jdbcType=VARCHAR},
+            <if test="avatarUrl != null">
+                #{avatarUrl,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
                 #{status,jdbcType=VARCHAR},
             </if>
-            <if test="creatorId != null">
-                #{creatorId,jdbcType=VARCHAR},
+            <if test="crterId != null">
+                #{crterId,jdbcType=VARCHAR},
             </if>
-            <if test="creatorName != null">
-                #{creatorName,jdbcType=VARCHAR},
+            <if test="crterName != null">
+                #{crterName,jdbcType=VARCHAR},
             </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
+            <if test="crteTime != null">
+                #{crteTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updaterId != null">
-                #{updaterId,jdbcType=VARCHAR},
+            <if test="updterId != null">
+                #{updterId,jdbcType=VARCHAR},
             </if>
-            <if test="updaterName != null">
-                #{updaterName,jdbcType=VARCHAR},
+            <if test="updterName != null">
+                #{updterName,jdbcType=VARCHAR},
             </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
+            <if test="updtTime != null">
+                #{updtTime,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>
@@ -131,58 +131,58 @@
         update user
         <set>
             <if test="username != null">
-                username = #{username,jdbcType=VARCHAR},
+                USERNAME = #{username,jdbcType=VARCHAR},
             </if>
             <if test="gender != null">
-                gender = #{gender,jdbcType=INTEGER},
+                GENDER = #{gender,jdbcType=INTEGER},
             </if>
-            <if test="birthday != null">
-                birthday = #{birthday,jdbcType=DATE},
+            <if test="bitrh != null">
+                BITRH = #{bitrh,jdbcType=DATE},
             </if>
             <if test="tel != null">
-                tel = #{tel,jdbcType=VARCHAR},
+                TEL = #{tel,jdbcType=VARCHAR},
             </if>
-            <if test="avatar != null">
-                avatar = #{avatar,jdbcType=VARCHAR},
+            <if test="avatarUrl != null">
+                AVATAR_URL = #{avatarUrl,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
-                status = #{status,jdbcType=VARCHAR},
+                STATUS = #{status,jdbcType=VARCHAR},
             </if>
-            <if test="creatorId != null">
-                creator_id = #{creatorId,jdbcType=VARCHAR},
+            <if test="crterId != null">
+                CRTER_ID = #{crterId,jdbcType=VARCHAR},
             </if>
-            <if test="creatorName != null">
-                creator_name = #{creatorName,jdbcType=VARCHAR},
+            <if test="crterName != null">
+                CRTER_NAME = #{crterName,jdbcType=VARCHAR},
             </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
+            <if test="crteTime != null">
+                CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updaterId != null">
-                updater_id = #{updaterId,jdbcType=VARCHAR},
+            <if test="updterId != null">
+                UPDTER_ID = #{updterId,jdbcType=VARCHAR},
             </if>
-            <if test="updaterName != null">
-                updater_name = #{updaterName,jdbcType=VARCHAR},
+            <if test="updterName != null">
+                UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
             </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            <if test="updtTime != null">
+                UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where user_id = #{userId,jdbcType=VARCHAR}
+        where USER_ID = #{userId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="cn.mask.mask.user.dubbo.service.user.pojo.po.UserPO">
     update user
-    set username = #{username,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=INTEGER},
-      birthday = #{birthday,jdbcType=DATE},
-      tel = #{tel,jdbcType=VARCHAR},
-      avatar = #{avatar,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
-      creator_id = #{creatorId,jdbcType=VARCHAR},
-      creator_name = #{creatorName,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      updater_id = #{updaterId,jdbcType=VARCHAR},
-      updater_name = #{updaterName,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where user_id = #{userId,jdbcType=VARCHAR}
+    set USERNAME = #{username,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=INTEGER},
+      BITRH = #{bitrh,jdbcType=DATE},
+      TEL = #{tel,jdbcType=VARCHAR},
+      AVATAR_URL = #{avatarUrl,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CRTER_ID = #{crterId,jdbcType=VARCHAR},
+      CRTER_NAME = #{crterName,jdbcType=VARCHAR},
+      CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
+      UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+      UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+      UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP}
+    where USER_ID = #{userId,jdbcType=VARCHAR}
   </update>
 </mapper>
