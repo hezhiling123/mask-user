@@ -15,6 +15,7 @@ public class UserDTO {
      * 用户id
      */
     private String userId;
+
     /**
      * 名称
      */

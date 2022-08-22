@@ -1,7 +1,7 @@
-package cn.mask.mask.user.dubbo.useridentity.dao;
+package cn.mask.mask.user.dubbo.service.useridentity.dao;
 
-import cn.mask.mask.user.dubbo.useridentity.pojo.dto.QUserIdentityDTO;
-import cn.mask.mask.user.dubbo.useridentity.pojo.po.UserIdentityPO;
+import cn.mask.mask.user.dubbo.service.useridentity.pojo.dto.QUserIdentityDTO;
+import cn.mask.mask.user.dubbo.service.useridentity.pojo.po.UserIdentityPO;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserIdentityMapper {

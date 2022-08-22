@@ -3,20 +3,17 @@ package cn.mask.mask.user.dubbo.service.login.service;
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.mask.mask.common.core.framework.web.WrapperResponse;
-import cn.mask.mask.common.core.framework.web.constant.ResponseCodeConstant;
+import cn.mask.mask.common.core.framework.web.enums.ResultCode;
 import cn.mask.mask.common.core.framework.web.exception.MaskException;
-import cn.mask.mask.common.core.framework.web.exception.ResultStatusCode;
-import cn.mask.mask.model.user.po.UserPO;
-import cn.mask.mask.user.api.login.dto.WeiXinUserInfo;
 import cn.mask.mask.user.api.login.dto.WeiXinLoginInfo;
+import cn.mask.mask.user.api.login.dto.WeiXinUserInfo;
 import cn.mask.mask.user.api.login.service.LoginService;
 import cn.mask.mask.user.api.user.dto.UserDTO;
-import cn.mask.mask.user.dubbo.common.constant.CommonConstant;
 import cn.mask.mask.user.dubbo.service.user.bo.UserBO;
-import cn.mask.mask.user.dubbo.service.user.dao.UserMapper;
+import cn.mask.mask.user.dubbo.service.user.pojo.enums.UserStatusEnum;
+import cn.mask.mask.user.dubbo.service.user.pojo.po.UserBasePO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,9 +29,6 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/user/mask/service/login")
 public class LoginServiceImpl implements LoginService {
-
-    @Autowired
-    private UserMapper userMapper;
 
     @Resource
     private WxMaService wxService;
@@ -57,7 +51,7 @@ public class LoginServiceImpl implements LoginService {
         log.info(code);
         log.info(WeiXinUserInfo.toString());
         if (code == null) {
-            return WrapperResponse.error(ResultStatusCode.HTTP_ERROR_400.getCode(), "微信认证code为空，无法登录", null);
+            return WrapperResponse.error(ResultCode.NULL_REQUIRED_PARAMETER, "微信认证code为空，无法登录", null);
         }
 
         String sessionKey;
@@ -67,11 +61,11 @@ public class LoginServiceImpl implements LoginService {
             sessionKey = result.getSessionKey();
             openId = result.getOpenid();
         } catch (Exception e) {
-            throw new MaskException(ResultStatusCode.HTTP_ERROR_500.getCode(), "调起微信认证服务失败" + e.getMessage());
+            throw new MaskException(ResultCode.INVOKE_THIRD_PARTY_SERVICE_ERR, "调起微信认证服务失败" + e.getMessage());
         }
 
         if (StringUtils.isBlank(sessionKey) || StringUtils.isBlank(openId)) {
-            throw new MaskException(ResultStatusCode.HTTP_ERROR_500.getCode(), "微信认证服务返回为空");
+            throw new MaskException(ResultCode.INVOKE_THIRD_PARTY_SERVICE_ERR, "微信认证服务返回为空");
         }
         return WrapperResponse.success(new UserDTO());
     }
@@ -80,7 +74,7 @@ public class LoginServiceImpl implements LoginService {
      * 通过token登录
      *
      * @param tokenStr token
-     * @return {@link UserPO}
+     * @return {@link WeiXinUserInfo}
      */
     @Override
     @PostMapping("login")
@@ -100,21 +94,16 @@ public class LoginServiceImpl implements LoginService {
         return null;
     }
 
-    private void checkUserStatus(UserPO user) throws MaskException {
+    private void checkUserStatus(UserBasePO user) throws MaskException {
         // 用户未激活
-        if (CommonConstant.USER_STATUS_NO_ACTIVATION.equals(user.getStatus())) {
-            throw new MaskException(ResultStatusCode.NOT_PARAM_USER_OR_ERROR_PWD,
-                    ResponseCodeConstant.USER_LOGIN_FAIL_NO_ACTIVATION_MSG);
-        }
+        //todo
         // 用户已冻结
-        if (CommonConstant.USER_STATUS_FREEZE.equals(user.getStatus())) {
-            throw new MaskException(ResultStatusCode.USER_FROZEN,
-                    ResponseCodeConstant.USER_LOGIN_FAIL_FREEZEED_MSG);
+        if (UserStatusEnum.FROZEN.getStatus().equals(user.getStatus())) {
+            throw new MaskException(ResultCode.USER_ACCOUNT_FROZEN);
         }
         // 用户已作废
-        if (CommonConstant.USER_STATUS_CANCEL.equals(user.getStatus())) {
-            throw new MaskException(ResultStatusCode.USER_FROZEN,
-                    ResponseCodeConstant.USER_LOGIN_FAIL_CANCELED_MSG);
+        if (UserStatusEnum.CANCEL.getStatus().equals(user.getStatus())) {
+            throw new MaskException(ResultCode.USER_ACCOUNT_CANCEL);
         }
     }
 }

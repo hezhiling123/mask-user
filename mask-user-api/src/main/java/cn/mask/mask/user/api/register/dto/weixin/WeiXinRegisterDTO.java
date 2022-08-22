@@ -1,4 +1,4 @@
-package cn.mask.mask.user.dubbo.service.register.process.impl.weixin;
+package cn.mask.mask.user.api.register.dto.weixin;
 
 import cn.mask.mask.user.api.register.dto.RegisterDTO;
 import lombok.Data;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * @author hezhiling
  * @version 1.0
- * @date 2022-07-24 22:40:46
+ * @date 2022-07-24 16:36:49
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

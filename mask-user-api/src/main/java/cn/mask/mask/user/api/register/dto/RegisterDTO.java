@@ -12,10 +12,10 @@ public class RegisterDTO {
     /**
      * 用户基本信息
      */
-    UserBaseInfo userBaseInfo;
+    UserBaseInfoDTO userBaseInfo;
 
     /**
      * 注册信息
      */
-    RegisterInfoDTO registerInfoDTO;
+    RegisterInfoDTO registerInfo;
 }

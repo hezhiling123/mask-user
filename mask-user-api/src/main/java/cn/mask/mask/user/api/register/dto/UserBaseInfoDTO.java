@@ -8,7 +8,7 @@ import lombok.Data;
  * @date 2022-07-24 16:29:00
  */
 @Data
-public class UserBaseInfo {
+public class UserBaseInfoDTO {
     /**
      * 用户id
      */
@@ -33,6 +33,11 @@ public class UserBaseInfo {
      * 电话
      */
     private String tel;
+
+    /**
+     * 邮箱地址
+     */
+    private String email;
 
     /**
      * 头像地址

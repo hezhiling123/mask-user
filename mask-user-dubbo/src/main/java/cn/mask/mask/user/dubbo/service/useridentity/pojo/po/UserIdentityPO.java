@@ -1,4 +1,4 @@
-package cn.mask.mask.user.dubbo.useridentity.pojo.po;
+package cn.mask.mask.user.dubbo.service.useridentity.pojo.po;
 
 import java.util.Date;
 

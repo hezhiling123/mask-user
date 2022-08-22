@@ -13,7 +13,12 @@ public class RegisterInfoDTO {
     /**
      * 注册渠道
      */
-    private String regChannel;
+    private String regAppId;
+
+    /**
+     * 注册app名称
+     */
+    private String regAppName;
 
     /**
      * 注册方式

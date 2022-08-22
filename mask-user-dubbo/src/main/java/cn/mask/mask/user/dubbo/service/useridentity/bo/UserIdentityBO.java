@@ -1,8 +1,8 @@
-package cn.mask.mask.user.dubbo.useridentity.bo;
+package cn.mask.mask.user.dubbo.service.useridentity.bo;
 
 import cn.mask.mask.common.core.framework.web.exception.MaskException;
-import cn.mask.mask.user.dubbo.useridentity.dao.UserIdentityMapper;
-import cn.mask.mask.user.dubbo.useridentity.pojo.po.UserIdentityPO;
+import cn.mask.mask.user.dubbo.service.useridentity.pojo.dto.QUserIdentityDTO;
+import cn.mask.mask.user.dubbo.service.useridentity.pojo.po.UserIdentityPO;
 
 /**
  * @author hezhiling
@@ -18,5 +18,5 @@ public interface UserIdentityBO {
      */
     void insertUserIdentity(UserIdentityPO userIdentityPO) throws MaskException;
 
-    UserIdentityPO queryUserIdentity();
+    UserIdentityPO queryUserIdentity(QUserIdentityDTO qUserIdentityDTO);
 }

@@ -1,16 +1,21 @@
 package cn.mask.mask.user.dubbo.service.user.bo.impl;
 
-import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.mask.mask.common.core.framework.web.enums.ResultCode;
+import cn.mask.mask.common.core.framework.web.exception.MaskException;
+import cn.mask.mask.user.api.register.dto.RegisterInfoDTO;
+import cn.mask.mask.user.api.register.dto.UserBaseInfoDTO;
 import cn.mask.mask.user.dubbo.common.constant.CommonConstant;
 import cn.mask.mask.user.dubbo.service.user.bo.UserBO;
-import cn.mask.mask.user.dubbo.service.user.dao.UserMapper;
-import cn.mask.mask.user.dubbo.service.user.pojo.dto.UserDTO;
-import cn.mask.mask.user.dubbo.service.user.pojo.po.UserPO;
+import cn.mask.mask.user.dubbo.service.user.dao.UserBaseMapper;
+import cn.mask.mask.user.dubbo.service.user.pojo.dto.QUserBaseDTO;
+import cn.mask.mask.user.dubbo.service.user.pojo.po.UserBasePO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author hezhiling
@@ -21,33 +26,42 @@ import javax.annotation.Resource;
 public class UserBOImpl implements UserBO {
 
     @Resource
-    UserMapper userMapper;
+    UserBaseMapper userBaseMapper;
 
     @Override
-    public void addUser(UserDTO userDTO) {
-        userMapper.insert(packUserPO(userDTO));
+    public void addUser(UserBaseInfoDTO userBaseInfoDTO, RegisterInfoDTO registerInfoDTO) {
+        userBaseMapper.insert(packUserPO(userBaseInfoDTO, registerInfoDTO));
+    }
+
+    /**
+     * 批量查询用户信息
+     *
+     * @param qUserBaseDTO {@link QUserBaseDTO} 查询信息
+     * @return {@link UserPO} 用户信息
+     * @throws MaskException e
+     */
+    @Override
+    public List<UserBasePO> listUser(QUserBaseDTO qUserBaseDTO) throws MaskException {
+        if (ObjectUtil.isNull(qUserBaseDTO)) {
+            throw new MaskException(ResultCode.NULL_REQUIRED_PARAMETER, "查询用户基本信息时，请传入至少一项必填参数");
+        }
+        return userBaseMapper.listUserByQUserBaseDTO(qUserBaseDTO);
     }
 
     /**
      * 装配UserPO
      *
-     * @param userDTO   dto
-     * @return  {@link UserPO}
+     * @param userBaseInfoDTO {@link UserBaseInfoDTO} 用户基本信息，
+     * @return {@link UserBasePO}
      */
-    private UserPO packUserPO(UserDTO userDTO) {
-        UserPO userPO = new UserPO();
-        BeanUtils.copyProperties(userDTO, userPO);
-        return UserPO.builder()
-                .userId("1")
-                .avatarUrl("1")
-                .status(CommonConstant.USER_STATUS_NO_ACTIVATION)
-                .gender(ObjectUtil.isNull(userPO.getGender()) ? 0 : userPO.getGender())
-                .crterName("system")
-                .crterId("system")
-                .crteTime(new DateTime())
-                .updterId("system")
-                .updterName("register")
-                .updtTime(new DateTime())
-                .build();
+    private UserBasePO packUserPO(UserBaseInfoDTO userBaseInfoDTO, RegisterInfoDTO registerInfoDTO) {
+        UserBasePO userBasePO = new UserBasePO();
+        BeanUtils.copyProperties(userBaseInfoDTO, userBasePO);
+        userBasePO.setCrtorId(userBaseInfoDTO.getUserId());
+        userBasePO.setCrtorName(userBaseInfoDTO.getUsername());
+        userBasePO.setStatus(CommonConstant.USER_STATUS_NORMAL);
+        userBasePO.setCrteAppId(registerInfoDTO.getRegAppId());
+        userBasePO.setCrteType(registerInfoDTO.getRegType().getType());
+        return userBasePO;
     }
 }

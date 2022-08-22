@@ -1,15 +1,16 @@
 package cn.mask.mask.user.dubbo.service.user.pojo.po;
 
-import lombok.AllArgsConstructor;
+import cn.mask.mask.model.BasePO;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class UserPO {
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class UserBasePO extends BasePO {
     private String userId;
 
     private String username;
@@ -20,21 +21,15 @@ public class UserPO {
 
     private String tel;
 
+    private String email;
+
     private String avatarUrl;
 
     private String status;
 
-    private String crterId;
+    private String crteAppId;
 
-    private String crterName;
-
-    private Date crteTime;
-
-    private String updterId;
-
-    private String updterName;
-
-    private Date updtTime;
+    private String crteType;
 
     public String getUserId() {
         return userId;
@@ -76,6 +71,14 @@ public class UserPO {
         this.tel = tel == null ? null : tel.trim();
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
     public String getAvatarUrl() {
         return avatarUrl;
     }
@@ -92,51 +95,19 @@ public class UserPO {
         this.status = status == null ? null : status.trim();
     }
 
-    public String getCrterId() {
-        return crterId;
+    public String getCrteAppId() {
+        return crteAppId;
     }
 
-    public void setCrterId(String crterId) {
-        this.crterId = crterId == null ? null : crterId.trim();
+    public void setCrteAppId(String crteAppId) {
+        this.crteAppId = crteAppId == null ? null : crteAppId.trim();
     }
 
-    public String getCrterName() {
-        return crterName;
+    public String getCrteType() {
+        return crteType;
     }
 
-    public void setCrterName(String crterName) {
-        this.crterName = crterName == null ? null : crterName.trim();
-    }
-
-    public Date getCrteTime() {
-        return crteTime;
-    }
-
-    public void setCrteTime(Date crteTime) {
-        this.crteTime = crteTime;
-    }
-
-    public String getUpdterId() {
-        return updterId;
-    }
-
-    public void setUpdterId(String updterId) {
-        this.updterId = updterId == null ? null : updterId.trim();
-    }
-
-    public String getUpdterName() {
-        return updterName;
-    }
-
-    public void setUpdterName(String updterName) {
-        this.updterName = updterName == null ? null : updterName.trim();
-    }
-
-    public Date getUpdtTime() {
-        return updtTime;
-    }
-
-    public void setUpdtTime(Date updtTime) {
-        this.updtTime = updtTime;
+    public void setCrteType(String crteType) {
+        this.crteType = crteType == null ? null : crteType.trim();
     }
 }

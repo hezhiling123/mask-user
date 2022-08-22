@@ -1,10 +1,10 @@
-package cn.mask.mask.user.dubbo.useridentity.bo.impl;
+package cn.mask.mask.user.dubbo.service.useridentity.bo.impl;
 
-import cn.hutool.core.date.DateUtil;
 import cn.mask.mask.common.core.framework.web.exception.MaskException;
-import cn.mask.mask.user.dubbo.useridentity.bo.UserIdentityBO;
-import cn.mask.mask.user.dubbo.useridentity.dao.UserIdentityMapper;
-import cn.mask.mask.user.dubbo.useridentity.pojo.po.UserIdentityPO;
+import cn.mask.mask.user.dubbo.service.useridentity.bo.UserIdentityBO;
+import cn.mask.mask.user.dubbo.service.useridentity.dao.UserIdentityMapper;
+import cn.mask.mask.user.dubbo.service.useridentity.pojo.dto.QUserIdentityDTO;
+import cn.mask.mask.user.dubbo.service.useridentity.pojo.po.UserIdentityPO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -32,7 +32,7 @@ public class UserIdentityBOImpl implements UserIdentityBO {
     }
 
     @Override
-    public UserIdentityPO queryUserIdentity() {
-        return userIdentityMapper.listUserIdentity();
+    public UserIdentityPO queryUserIdentity(QUserIdentityDTO qUserIdentityDTO) {
+        return userIdentityMapper.listUserIdentity(qUserIdentityDTO);
     }
 }

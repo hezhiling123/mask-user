@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.mask.mask.user.dubbo.useridentity.dao.UserIdentityMapper">
-    <resultMap id="BaseResultMap" type="cn.mask.mask.user.dubbo.useridentity.pojo.po.UserIdentityPO">
+<mapper namespace="cn.mask.mask.user.dubbo.service.useridentity.dao.UserIdentityMapper">
+    <resultMap id="BaseResultMap" type="cn.mask.mask.user.dubbo.service.useridentity.pojo.po.UserIdentityPO">
         <id column="USER_ID" jdbcType="VARCHAR" property="userId"/>
         <id column="IDENTIFY_TYPE" jdbcType="VARCHAR" property="identifyType"/>
         <result column="ID" jdbcType="INTEGER" property="id"/>
@@ -16,7 +16,7 @@
         <result column="UPDT_TIME" jdbcType="TIMESTAMP" property="updtTime"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
-               type="cn.mask.mask.user.dubbo.useridentity.pojo.po.UserIdentityPO">
+               type="cn.mask.mask.user.dubbo.service.useridentity.pojo.po.UserIdentityPO">
         <result column="CRTER_NAME" jdbcType="VARBINARY" property="crterName"/>
     </resultMap>
     <sql id="Base_Column_List">
@@ -32,10 +32,10 @@
         UPDTER_ID,<!-- 更新者id -->
         UPDTER_NAME,<!-- 更新者名称 -->
         UPDT_TIME<!-- 跟心时间 -->
-  </sql>
+    </sql>
     <sql id="Blob_Column_List">
-    CRTER_NAME
-  </sql>
+            CRTER_NAME
+    </sql>
     <select id="selectByPrimaryKey" parameterType="map" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
@@ -45,28 +45,68 @@
         where USER_ID = #{userId,jdbcType=VARCHAR}
         and IDENTIFY_TYPE = #{identifyType,jdbcType=VARCHAR}
     </select>
-    <select id="listUserIdentity" resultType="cn.mask.mask.user.dubbo.useridentity.pojo.po.UserIdentityPO">
+    <select id="listUserIdentity" resultType="cn.mask.mask.user.dubbo.service.useridentity.pojo.po.UserIdentityPO">
         select
         <include refid="Base_Column_List"/>
+        from user_identity
+        where
+        <if test="userId != null and userId != ''">
+            and USER_ID = #{qUserIdentityDTO.userId}
+        </if>
+        <if test="identifyType != null and identifyType != ''">
+            and IDENTIFY_TYPE = #{qUserIdentityDTO.identifyType}
+        </if>
+        <if test="id != null and id != ''">
+            and ID = #{qUserIdentityDTO.id}
+        </if>
+        <if test="identifer != null and identifer != ''">
+            and IDENTIFER = #{qUserIdentityDTO.identifer}
+        </if>
+        <if test="credential != null and credential != ''">
+            and CREDENTIAL = #{qUserIdentityDTO.credential}
+        </if>
+        <if test="salt != null and salt != ''">
+            and SALTL = #{qUserIdentityDTO.salt}
+        </if>
+        <if test="crterId != null and crterId != ''">
+            and CRTER_IDL = #{qUserIdentityDTO.crterId}
+        </if>
+        <if test="crteTime != null">
+            and CRTE_TIMEL = #{qUserIdentityDTO.crteTime}
+        </if>
+        <if test="updterId != null and updterId != ''">
+            and UPDTER_IDL = #{qUserIdentityDTO.updterId}
+        </if>
+        <if test="updterName != null and updterName != ''">
+            and UPDTER_NAMEL = #{qUserIdentityDTO.updterName}
+        </if>
+        <if test="updtTime != null">
+            and UPDT_TIME = #{qUserIdentityDTO.updtTime}
+        </if>
+        <if test="crterName != null and crterName != ''">
+            and CRTER_NAME = #{qUserIdentityDTO.crterName}
+        </if>
     </select>
     <delete id="deleteByPrimaryKey" parameterType="map">
-    delete from user_identity
-    where USER_ID = #{userId,jdbcType=VARCHAR}
-      and IDENTIFY_TYPE = #{identifyType,jdbcType=VARCHAR}
-  </delete>
-    <insert id="insert" parameterType="cn.mask.mask.user.dubbo.useridentity.pojo.po.UserIdentityPO">
-    insert into user_identity (USER_ID, IDENTIFY_TYPE, ID, 
-      IDENTIFER, CREDENTIAL, SALT, 
-      CRTER_ID, CRTER_TIME, UPDTER_ID, 
-      UPDTER_NAME, UPDT_TIME, CRTER_NAME
-      )
-    values (#{userId,jdbcType=VARCHAR}, #{identifyType,jdbcType=VARCHAR}, #{id,jdbcType=INTEGER}, 
-      #{identifer,jdbcType=VARCHAR}, #{credential,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
-      #{crterId,jdbcType=VARCHAR}, now(), #{updterId,jdbcType=VARCHAR},
-      #{updterName,jdbcType=VARCHAR}, now(), #{crterName,jdbcType=VARBINARY}
-      )
-  </insert>
-    <insert id="insertSelective" parameterType="cn.mask.mask.user.dubbo.useridentity.pojo.po.UserIdentityPO">
+
+            delete from user_identity
+            where USER_ID = #{userId,jdbcType=VARCHAR}
+              and IDENTIFY_TYPE = #{identifyType,jdbcType=VARCHAR}
+
+    </delete>
+    <insert id="insert" parameterType="cn.mask.mask.user.dubbo.service.useridentity.pojo.po.UserIdentityPO">
+            insert into user_identity (USER_ID, IDENTIFY_TYPE, ID,
+              IDENTIFER, CREDENTIAL, SALT,
+              CRTER_ID, CRTER_TIME, UPDTER_ID,
+              UPDTER_NAME, UPDT_TIME, CRTER_NAME
+              )
+            values (#{userId,jdbcType=VARCHAR}, #{identifyType,jdbcType=VARCHAR}, #{id,jdbcType=INTEGER},
+              #{identifer,jdbcType=VARCHAR}, #{credential,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR},
+              #{crterId,jdbcType=VARCHAR}, now(), #{updterId,jdbcType=VARCHAR},
+              #{updterName,jdbcType=VARCHAR}, now(), #{crterName,jdbcType=VARBINARY}
+              )
+    </insert>
+    <insert id="insertSelective" parameterType="cn.mask.mask.user.dubbo.service.useridentity.pojo.po.UserIdentityPO">
         insert into user_identity
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null">
@@ -146,7 +186,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective"
-            parameterType="cn.mask.mask.user.dubbo.useridentity.pojo.po.UserIdentityPO">
+            parameterType="cn.mask.mask.user.dubbo.service.useridentity.pojo.po.UserIdentityPO">
         update user_identity
         <set>
             <if test="id != null">
@@ -184,33 +224,33 @@
         and IDENTIFY_TYPE = #{identifyType,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs"
-            parameterType="cn.mask.mask.user.dubbo.useridentity.pojo.po.UserIdentityPO">
-    update user_identity
-    set ID = #{id,jdbcType=INTEGER},
-      IDENTIFER = #{identifer,jdbcType=VARCHAR},
-      CREDENTIAL = #{credential,jdbcType=VARCHAR},
-      SALT = #{salt,jdbcType=VARCHAR},
-      CRTER_ID = #{crterId,jdbcType=VARCHAR},
-      CRTER_TIME = #{crterTime,jdbcType=TIMESTAMP},
-      UPDTER_ID = #{updterId,jdbcType=VARCHAR},
-      UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
-      UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
-      CRTER_NAME = #{crterName,jdbcType=VARBINARY}
-    where USER_ID = #{userId,jdbcType=VARCHAR}
-      and IDENTIFY_TYPE = #{identifyType,jdbcType=VARCHAR}
-  </update>
-    <update id="updateByPrimaryKey" parameterType="cn.mask.mask.user.dubbo.useridentity.pojo.po.UserIdentityPO">
-    update user_identity
-    set ID = #{id,jdbcType=INTEGER},
-      IDENTIFER = #{identifer,jdbcType=VARCHAR},
-      CREDENTIAL = #{credential,jdbcType=VARCHAR},
-      SALT = #{salt,jdbcType=VARCHAR},
-      CRTER_ID = #{crterId,jdbcType=VARCHAR},
-      CRTER_TIME = #{crterTime,jdbcType=TIMESTAMP},
-      UPDTER_ID = #{updterId,jdbcType=VARCHAR},
-      UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
-      UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP}
-    where USER_ID = #{userId,jdbcType=VARCHAR}
-      and IDENTIFY_TYPE = #{identifyType,jdbcType=VARCHAR}
-  </update>
+            parameterType="cn.mask.mask.user.dubbo.service.useridentity.pojo.po.UserIdentityPO">
+            update user_identity
+            set ID = #{id,jdbcType=INTEGER},
+              IDENTIFER = #{identifer,jdbcType=VARCHAR},
+              CREDENTIAL = #{credential,jdbcType=VARCHAR},
+              SALT = #{salt,jdbcType=VARCHAR},
+              CRTER_ID = #{crterId,jdbcType=VARCHAR},
+              CRTER_TIME = #{crterTime,jdbcType=TIMESTAMP},
+              UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+              UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+              UPDT_TIME = now(),
+              CRTER_NAME = #{crterName,jdbcType=VARBINARY}
+            where USER_ID = #{userId,jdbcType=VARCHAR}
+              and IDENTIFY_TYPE = #{identifyType,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.mask.mask.user.dubbo.service.useridentity.pojo.po.UserIdentityPO">
+            update user_identity
+            set ID = #{id,jdbcType=INTEGER},
+              IDENTIFER = #{identifer,jdbcType=VARCHAR},
+              CREDENTIAL = #{credential,jdbcType=VARCHAR},
+              SALT = #{salt,jdbcType=VARCHAR},
+              CRTER_ID = #{crterId,jdbcType=VARCHAR},
+              CRTER_TIME = #{crterTime,jdbcType=TIMESTAMP},
+              UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+              UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+              UPDT_TIME = now()
+            where USER_ID = #{userId,jdbcType=VARCHAR}
+              and IDENTIFY_TYPE = #{identifyType,jdbcType=VARCHAR}
+    </update>
 </mapper>

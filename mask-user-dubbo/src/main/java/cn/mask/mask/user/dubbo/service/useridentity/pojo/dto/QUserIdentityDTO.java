@@ -1,4 +1,4 @@
-package cn.mask.mask.user.dubbo.useridentity.pojo.dto;
+package cn.mask.mask.user.dubbo.service.useridentity.pojo.dto;
 
 /**
  * @author hezhiling
