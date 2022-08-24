@@ -1,13 +1,12 @@
 package cn.mask.mask.user.dubbo.service.user.bo.impl;
 
-import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.mask.mask.common.core.framework.web.enums.ResultCode;
 import cn.mask.mask.common.core.framework.web.exception.MaskException;
 import cn.mask.mask.user.api.register.dto.RegisterInfoDTO;
 import cn.mask.mask.user.api.register.dto.UserBaseInfoDTO;
 import cn.mask.mask.user.dubbo.common.constant.CommonConstant;
-import cn.mask.mask.user.dubbo.service.user.bo.UserBO;
+import cn.mask.mask.user.dubbo.service.user.bo.IUserBO;
 import cn.mask.mask.user.dubbo.service.user.dao.UserBaseMapper;
 import cn.mask.mask.user.dubbo.service.user.pojo.dto.QUserBaseDTO;
 import cn.mask.mask.user.dubbo.service.user.pojo.po.UserBasePO;
@@ -23,7 +22,7 @@ import java.util.List;
  * @date 2022-05-01 17:28:40
  */
 @Component
-public class UserBOImpl implements UserBO {
+public class UserBOImpl implements IUserBO {
 
     @Resource
     UserBaseMapper userBaseMapper;

@@ -8,7 +8,7 @@ import cn.mask.mask.user.dubbo.service.user.pojo.po.UserBasePO;
 
 import java.util.List;
 
-public interface UserBO {
+public interface IUserBO {
     /**
      * 添加用户基本信息
      *

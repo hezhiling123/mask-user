@@ -1,5 +1,6 @@
 package cn.mask.mask.user.dubbo.common.http.response;
 
+import cn.mask.mask.common.core.framework.web.WrapperResponse;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;

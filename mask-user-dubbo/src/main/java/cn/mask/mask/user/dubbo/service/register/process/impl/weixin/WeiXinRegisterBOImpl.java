@@ -9,7 +9,7 @@ import cn.mask.mask.user.api.register.dto.weixin.WeiXinRegisterDTO;
 import cn.mask.mask.user.api.register.enums.RegTypeEnum;
 import cn.mask.mask.user.dubbo.service.register.process.AbstractRegisterBO;
 import cn.mask.mask.user.dubbo.service.register.process.RegisterBO;
-import cn.mask.mask.user.dubbo.service.user.bo.OpenCreditBO;
+import cn.mask.mask.user.dubbo.service.user.bo.IOpenCreditBO;
 import cn.mask.mask.user.dubbo.service.user.pojo.dto.QOpenCreditDTO;
 import cn.mask.mask.user.dubbo.service.user.pojo.po.OpenCreditPO;
 import org.springframework.beans.factory.InitializingBean;
@@ -29,7 +29,7 @@ import java.util.List;
 public class WeiXinRegisterBOImpl extends AbstractRegisterBO implements RegisterBO, InitializingBean {
 
     @Resource
-    private OpenCreditBO openCreditBO;
+    private IOpenCreditBO IOpenCreditBO;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -93,7 +93,7 @@ public class WeiXinRegisterBOImpl extends AbstractRegisterBO implements Register
         QOpenCreditDTO qOpenCreditDTO = new QOpenCreditDTO();
         qOpenCreditDTO.setBindType(getRegTypeEnum().getType());
         qOpenCreditDTO.setOpenId(weiXinRegisterDTO.getOpenId());
-        List<OpenCreditPO> openCreditPOList = openCreditBO.listOpenCredit(qOpenCreditDTO);
+        List<OpenCreditPO> openCreditPOList = IOpenCreditBO.listOpenCredit(qOpenCreditDTO);
         if (CollectionUtil.isNotEmpty(openCreditPOList)) {
             throw new MaskException(ResultCode.WEI_XIN_OPEN_ID_EXISTS, "该微信号已绑定，请勿重复绑定");
         }

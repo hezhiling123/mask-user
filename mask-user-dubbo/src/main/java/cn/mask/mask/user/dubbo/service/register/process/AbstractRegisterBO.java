@@ -6,8 +6,8 @@ import cn.mask.mask.common.core.framework.web.exception.MaskException;
 import cn.mask.mask.user.api.register.dto.RegisterDTO;
 import cn.mask.mask.user.api.register.dto.RegisterInfoDTO;
 import cn.mask.mask.user.api.register.dto.UserBaseInfoDTO;
-import cn.mask.mask.user.dubbo.service.user.bo.OpenCreditBO;
-import cn.mask.mask.user.dubbo.service.user.bo.UserBO;
+import cn.mask.mask.user.dubbo.service.user.bo.IUserBO;
+import cn.mask.mask.user.dubbo.service.user.bo.IOpenCreditBO;
 import cn.mask.mask.user.dubbo.service.user.pojo.dto.QUserBaseDTO;
 import cn.mask.mask.user.dubbo.service.user.pojo.po.OpenCreditPO;
 import cn.mask.mask.user.dubbo.service.user.pojo.po.UserBasePO;
@@ -34,13 +34,13 @@ public abstract class AbstractRegisterBO implements RegisterBO {
     private DefaultUidGenerator defaultUidGenerator;
 
     @Resource
-    private UserBO userBO;
+    private IUserBO userBO;
 
     @Resource
     private UserIdentityBO userIdentityBO;
 
     @Resource
-    private OpenCreditBO openCreditBO;
+    private IOpenCreditBO IOpenCreditBO;
 
     /**
      * 检查注册类型是否正确。
@@ -73,7 +73,7 @@ public abstract class AbstractRegisterBO implements RegisterBO {
         QUserBaseDTO qEmail = new QUserBaseDTO();
         qEmail.setEmail(registerDTO.getUserBaseInfo().getEmail());
         List<UserBasePO> userBasePOList = userBO.listUser(qEmail);
-        if (CollectionUtil.isEmpty(userBasePOList)) {
+        if (CollectionUtil.isNotEmpty(userBasePOList)) {
             throw new MaskException(ResultCode.EMAIL_EXISTS, "该邮箱号已被占用");
         }
     }
@@ -86,12 +86,12 @@ public abstract class AbstractRegisterBO implements RegisterBO {
     /**
      * 存储用户绑定信息
      *
-     * @param openCreditPO {@link OpenCreditBO} 用户绑定信息
+     * @param openCreditPO {@link IOpenCreditBO} 用户绑定信息
      * @throws MaskException e
      */
     @Transactional
     public void saveOpenCredit(OpenCreditPO openCreditPO) throws MaskException {
-        openCreditBO.saveOpenCredit(openCreditPO);
+        IOpenCreditBO.saveOpenCredit(openCreditPO);
     }
 
     @Transactional

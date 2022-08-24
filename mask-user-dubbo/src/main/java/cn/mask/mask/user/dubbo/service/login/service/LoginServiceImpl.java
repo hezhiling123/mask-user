@@ -9,7 +9,7 @@ import cn.mask.mask.user.api.login.dto.WeiXinLoginInfo;
 import cn.mask.mask.user.api.login.dto.WeiXinUserInfo;
 import cn.mask.mask.user.api.login.service.LoginService;
 import cn.mask.mask.user.api.user.dto.UserDTO;
-import cn.mask.mask.user.dubbo.service.user.bo.UserBO;
+import cn.mask.mask.user.dubbo.service.user.bo.IUserBO;
 import cn.mask.mask.user.dubbo.service.user.pojo.enums.UserStatusEnum;
 import cn.mask.mask.user.dubbo.service.user.pojo.po.UserBasePO;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +34,7 @@ public class LoginServiceImpl implements LoginService {
     private WxMaService wxService;
 
     @Resource
-    private UserBO userBO;
+    private IUserBO IUserBO;
 
     /**
      * 微信登录

@@ -1,7 +1,7 @@
 package cn.mask.mask.user.dubbo.service.user.bo.impl;
 
 import cn.mask.mask.common.core.framework.web.exception.MaskException;
-import cn.mask.mask.user.dubbo.service.user.bo.OpenCreditBO;
+import cn.mask.mask.user.dubbo.service.user.bo.IOpenCreditBO;
 import cn.mask.mask.user.dubbo.service.user.dao.OpenCreditMapper;
 import cn.mask.mask.user.dubbo.service.user.pojo.dto.QOpenCreditDTO;
 import cn.mask.mask.user.dubbo.service.user.pojo.po.OpenCreditPO;
@@ -16,7 +16,7 @@ import java.util.List;
  * @date 2022-08-02 22:06:44
  */
 @Service
-public class OpenCreditBOImpl implements OpenCreditBO {
+public class IOpenCreditBOImpl implements IOpenCreditBO {
     @Resource
     OpenCreditMapper openCreditMapper;
 

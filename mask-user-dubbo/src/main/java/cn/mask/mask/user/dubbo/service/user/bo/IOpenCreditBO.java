@@ -6,7 +6,7 @@ import cn.mask.mask.user.dubbo.service.user.pojo.po.OpenCreditPO;
 
 import java.util.List;
 
-public interface OpenCreditBO {
+public interface IOpenCreditBO {
     /**
      * 存储开放信息
      *
