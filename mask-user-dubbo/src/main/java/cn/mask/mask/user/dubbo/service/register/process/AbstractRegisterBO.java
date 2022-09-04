@@ -40,7 +40,7 @@ public abstract class AbstractRegisterBO implements RegisterBO {
     private UserIdentityBO userIdentityBO;
 
     @Resource
-    private IOpenCreditBO IOpenCreditBO;
+    private IOpenCreditBO openCreditBO;
 
     /**
      * 检查注册类型是否正确。
@@ -91,7 +91,7 @@ public abstract class AbstractRegisterBO implements RegisterBO {
      */
     @Transactional
     public void saveOpenCredit(OpenCreditPO openCreditPO) throws MaskException {
-        IOpenCreditBO.saveOpenCredit(openCreditPO);
+        openCreditBO.saveOpenCredit(openCreditPO);
     }
 
     @Transactional

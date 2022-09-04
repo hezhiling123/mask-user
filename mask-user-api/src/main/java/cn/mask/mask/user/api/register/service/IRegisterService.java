@@ -11,7 +11,7 @@ import cn.mask.mask.user.api.register.dto.weixin.WeiXinRegisterDTO;
  * @version 1.0
  * @date 2022-05-01 18:04:14
  */
-public interface RegisterService {
+public interface IRegisterService {
 
     /**
      * 微信注册

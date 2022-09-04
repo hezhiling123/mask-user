@@ -2,6 +2,7 @@ package cn.mask.mask.user.api.user.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +11,8 @@ import java.util.Date;
  * @date 2022-05-01 17:14:09
  */
 @Data
-public class UserDTO {
+public class UserDTO implements Serializable {
+    private static final long serialVersionUID = -5806027957455313597L;
     /**
      * 用户id
      */

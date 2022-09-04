@@ -62,7 +62,7 @@
       #{openId,jdbcType=VARCHAR}, #{bindType,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{refreshToken,jdbcType=VARCHAR}, #{expiresIn,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR}, 
       #{reExpiresIn,jdbcType=VARCHAR}, #{crtorId,jdbcType=VARCHAR}, #{crtorName,jdbcType=VARCHAR}, 
-      #{crteTime,jdbcType=TIMESTAMP}, #{updterId,jdbcType=VARCHAR}, #{updterName,jdbcType=VARCHAR}, 
+      now(), #{updterId,jdbcType=VARCHAR}, #{updterName,jdbcType=VARCHAR},
       #{updtTime,jdbcType=TIMESTAMP})
   </insert>
     <insert id="insertSelective" parameterType="cn.mask.mask.user.dubbo.service.user.pojo.po.OpenCreditPO">

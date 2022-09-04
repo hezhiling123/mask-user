@@ -1,7 +1,7 @@
 dfs:
   url: 192.168.244.10:8181
 druid:
-  url: jdbc:mysql://119.3.30.5:3307/mask?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useSSL=false
+  url: jdbc:mysql://119.3.30.5:3307/mask_user?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useSSL=false
   username: root
   password: root
   driver-class-name: com.mysql.jdbc.Driver

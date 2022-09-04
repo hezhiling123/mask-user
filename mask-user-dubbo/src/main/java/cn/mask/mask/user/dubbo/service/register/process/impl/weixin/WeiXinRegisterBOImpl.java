@@ -52,6 +52,7 @@ public class WeiXinRegisterBOImpl extends AbstractRegisterBO implements Register
         super.saveUserBaseInfo(weiXinRegisterDTO.getUserBaseInfo(), weiXinRegisterDTO.getRegisterInfo());
         OpenCreditPO openCreditPO = initOpenCreditParams(weiXinRegisterDTO);
         openCreditPO.setOpenId(weiXinRegisterDTO.getOpenId());
+        openCreditPO.setBindType(getRegTypeEnum().getType());
         super.saveOpenCredit(openCreditPO);
         RegisterResultDTO registerResultDTO = new RegisterResultDTO();
         registerResultDTO.setUserId(userId);

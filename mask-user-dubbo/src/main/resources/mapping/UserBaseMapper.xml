@@ -30,7 +30,7 @@
         where USER_ID = #{userId,jdbcType=VARCHAR}
     </select>
 
-    <select id="listUserByQUserBaseDTO" resultType="cn.mask.mask.user.dubbo.service.user.pojo.po.UserBasePO">
+    <select id="listUserByQUserBaseDTO" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from user_base

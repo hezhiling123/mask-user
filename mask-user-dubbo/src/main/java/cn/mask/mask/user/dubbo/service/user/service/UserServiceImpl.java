@@ -17,8 +17,10 @@ import cn.mask.mask.user.dubbo.service.user.pojo.dto.QOpenCreditDTO;
 import cn.mask.mask.user.dubbo.service.user.pojo.dto.QUserBaseDTO;
 import cn.mask.mask.user.dubbo.service.user.pojo.po.OpenCreditPO;
 import cn.mask.mask.user.dubbo.service.user.pojo.po.UserBasePO;
+import org.apache.dubbo.config.annotation.Service;
+import org.eclipse.jetty.util.StringUtil;
 import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,6 +75,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     @PostMapping("/queryUserByCondition")
     public WrapperResponse<UserBaseInfoDTO> queryUserByCondition(@RequestBody QUserDTO qUserDTO) throws MaskException {
+        checkQueryUserInputCondition(qUserDTO);
         QUserBaseDTO qUserBaseDTO = new QUserBaseDTO();
         BeanUtils.copyProperties(qUserDTO, qUserBaseDTO);
         List<UserBasePO> userBasePOList = userBO.listUser(qUserBaseDTO);
@@ -97,5 +100,28 @@ public class UserServiceImpl implements IUserService {
         UserBaseInfoDTO userBaseInfoDTO = new UserBaseInfoDTO();
         BeanUtils.copyProperties(userBasePOByUserIdList.get(0), userBaseInfoDTO);
         return WrapperResponse.success(userBaseInfoDTO);
+    }
+
+    /**
+     * 检查条件查询用户信息接口入参
+     *
+     * @param qUserDTO {@link QUserDTO}
+     * @throws MaskException e
+     */
+    private void checkQueryUserInputCondition(QUserDTO qUserDTO) throws MaskException {
+        if (StringUtils.isEmpty(qUserDTO.getOpenId())
+                && StringUtils.isEmpty(qUserDTO.getPhone())
+                && StringUtils.isEmpty(qUserDTO.getEmail())
+                && StringUtils.isEmpty(qUserDTO.getUserId())) {
+            throw new MaskException(ResultCode.NULL_REQUIRED_PARAMETER, "查询用户信息时，无有效查询条件");
+        }
+        if (StringUtil.isNotBlank(qUserDTO.getOpenId())) {
+            if (StringUtils.isEmpty(qUserDTO.getBindType())) {
+                throw new MaskException(ResultCode.NULL_REQUIRED_PARAMETER, "查询用户信息时，传入openId，必须指定对应的绑定类型");
+            }
+            if (!RegTypeEnum.checkType(qUserDTO.getBindType())) {
+                throw new MaskException(ResultCode.REQUEST_PARAMETER_ERR, "查询用户信息时，非法的绑定类型");
+            }
+        }
     }
 }

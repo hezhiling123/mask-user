@@ -3,6 +3,7 @@ package cn.mask.mask.user.api.login.dto;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 /**
  * @author hezhiling
@@ -10,7 +11,8 @@ import javax.validation.constraints.NotBlank;
  * @date 2022-05-01 20:04:09
  */
 @Data
-public class WeiXinUserInfo {
+public class WeiXinUserInfo implements Serializable {
+    private static final long serialVersionUID = 3994383778664137154L;
     /**
      * 昵称
      */

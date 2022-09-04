@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 /**
  * @author hezhiling
@@ -13,7 +14,8 @@ import javax.validation.constraints.NotBlank;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class WeiXinRegisterDTO extends RegisterDTO {
+public class WeiXinRegisterDTO extends RegisterDTO implements Serializable {
+    private static final long serialVersionUID = 5726456970763117004L;
     /**
      * 注册码
      */
