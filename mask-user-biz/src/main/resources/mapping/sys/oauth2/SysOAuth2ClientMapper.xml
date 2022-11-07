@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mask.mask.user.biz.service.sys.sysoauth2.dao.SysOAuth2ClientMapper">
+    <resultMap id="BaseResultMap" type="cn.mask.mask.user.biz.service.sys.sysoauth2.pojo.po.SysOAuth2ClientPO">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="CLIENT_ID" jdbcType="VARCHAR" property="clientId"/>
+        <result column="CLIENT_NAME" jdbcType="VARCHAR" property="clientName"/>
+        <result column="CLIENT_SECRET" jdbcType="VARCHAR" property="clientSecret"/>
+        <result column="CLIENT_TYPE" jdbcType="VARCHAR" property="clientType"/>
+        <result column="LOGOUT_URL" jdbcType="VARCHAR" property="logoutUrl"/>
+        <result column="VALI_FLAG" jdbcType="BIT" property="valiFlag"/>
+        <result column="UPDTER_ID" jdbcType="VARCHAR" property="updterId"/>
+        <result column="UPDTER_NAME" jdbcType="VARCHAR" property="updterName"/>
+        <result column="UPDT_TIME" jdbcType="TIMESTAMP" property="updtTime"/>
+        <result column="CRTOR_ID" jdbcType="VARCHAR" property="crtorId"/>
+        <result column="CRTOR_NAME" jdbcType="VARCHAR" property="crtorName"/>
+        <result column="CRET_TIME" jdbcType="TIMESTAMP" property="cretTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, CLIENT_ID, CLIENT_NAME, CLIENT_SECRET, CLIENT_TYPE, LOGOUT_URL, VALI_FLAG, UPDTER_ID, 
+    UPDTER_NAME, UPDT_TIME, CRTOR_ID, CRTOR_NAME, CRET_TIME
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_oauth2_client
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_oauth2_client
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="cn.mask.mask.user.biz.service.sys.sysoauth2.pojo.po.SysOAuth2ClientPO">
+    insert into sys_oauth2_client (ID, CLIENT_ID, CLIENT_NAME, 
+      CLIENT_SECRET, CLIENT_TYPE, LOGOUT_URL, 
+      VALI_FLAG, UPDTER_ID, UPDTER_NAME, 
+      UPDT_TIME, CRTOR_ID, CRTOR_NAME, 
+      CRET_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{clientId,jdbcType=VARCHAR}, #{clientName,jdbcType=VARCHAR}, 
+      #{clientSecret,jdbcType=VARCHAR}, #{clientType,jdbcType=VARCHAR}, #{logoutUrl,jdbcType=VARCHAR}, 
+      #{valiFlag,jdbcType=BIT}, #{updterId,jdbcType=VARCHAR}, #{updterName,jdbcType=VARCHAR}, 
+      #{updtTime,jdbcType=TIMESTAMP}, #{crtorId,jdbcType=VARCHAR}, #{crtorName,jdbcType=VARCHAR}, 
+      #{cretTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective"
+            parameterType="cn.mask.mask.user.biz.service.sys.sysoauth2.pojo.po.SysOAuth2ClientPO">
+        insert into sys_oauth2_client
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="clientId != null">
+                CLIENT_ID,
+            </if>
+            <if test="clientName != null">
+                CLIENT_NAME,
+            </if>
+            <if test="clientSecret != null">
+                CLIENT_SECRET,
+            </if>
+            <if test="clientType != null">
+                CLIENT_TYPE,
+            </if>
+            <if test="logoutUrl != null">
+                LOGOUT_URL,
+            </if>
+            <if test="valiFlag != null">
+                VALI_FLAG,
+            </if>
+            <if test="updterId != null">
+                UPDTER_ID,
+            </if>
+            <if test="updterName != null">
+                UPDTER_NAME,
+            </if>
+            <if test="updtTime != null">
+                UPDT_TIME,
+            </if>
+            <if test="crtorId != null">
+                CRTOR_ID,
+            </if>
+            <if test="crtorName != null">
+                CRTOR_NAME,
+            </if>
+            <if test="cretTime != null">
+                CRET_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="clientId != null">
+                #{clientId,jdbcType=VARCHAR},
+            </if>
+            <if test="clientName != null">
+                #{clientName,jdbcType=VARCHAR},
+            </if>
+            <if test="clientSecret != null">
+                #{clientSecret,jdbcType=VARCHAR},
+            </if>
+            <if test="clientType != null">
+                #{clientType,jdbcType=VARCHAR},
+            </if>
+            <if test="logoutUrl != null">
+                #{logoutUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="valiFlag != null">
+                #{valiFlag,jdbcType=BIT},
+            </if>
+            <if test="updterId != null">
+                #{updterId,jdbcType=VARCHAR},
+            </if>
+            <if test="updterName != null">
+                #{updterName,jdbcType=VARCHAR},
+            </if>
+            <if test="updtTime != null">
+                #{updtTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="crtorId != null">
+                #{crtorId,jdbcType=VARCHAR},
+            </if>
+            <if test="crtorName != null">
+                #{crtorName,jdbcType=VARCHAR},
+            </if>
+            <if test="cretTime != null">
+                #{cretTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="cn.mask.mask.user.biz.service.sys.sysoauth2.pojo.po.SysOAuth2ClientPO">
+        update sys_oauth2_client
+        <set>
+            <if test="clientId != null">
+                CLIENT_ID = #{clientId,jdbcType=VARCHAR},
+            </if>
+            <if test="clientName != null">
+                CLIENT_NAME = #{clientName,jdbcType=VARCHAR},
+            </if>
+            <if test="clientSecret != null">
+                CLIENT_SECRET = #{clientSecret,jdbcType=VARCHAR},
+            </if>
+            <if test="clientType != null">
+                CLIENT_TYPE = #{clientType,jdbcType=VARCHAR},
+            </if>
+            <if test="logoutUrl != null">
+                LOGOUT_URL = #{logoutUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="valiFlag != null">
+                VALI_FLAG = #{valiFlag,jdbcType=BIT},
+            </if>
+            <if test="updterId != null">
+                UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+            </if>
+            <if test="updterName != null">
+                UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+            </if>
+            <if test="updtTime != null">
+                UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="crtorId != null">
+                CRTOR_ID = #{crtorId,jdbcType=VARCHAR},
+            </if>
+            <if test="crtorName != null">
+                CRTOR_NAME = #{crtorName,jdbcType=VARCHAR},
+            </if>
+            <if test="cretTime != null">
+                CRET_TIME = #{cretTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey"
+            parameterType="cn.mask.mask.user.biz.service.sys.sysoauth2.pojo.po.SysOAuth2ClientPO">
+    update sys_oauth2_client
+    set CLIENT_ID = #{clientId,jdbcType=VARCHAR},
+      CLIENT_NAME = #{clientName,jdbcType=VARCHAR},
+      CLIENT_SECRET = #{clientSecret,jdbcType=VARCHAR},
+      CLIENT_TYPE = #{clientType,jdbcType=VARCHAR},
+      LOGOUT_URL = #{logoutUrl,jdbcType=VARCHAR},
+      VALI_FLAG = #{valiFlag,jdbcType=BIT},
+      UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+      UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+      UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
+      CRTOR_ID = #{crtorId,jdbcType=VARCHAR},
+      CRTOR_NAME = #{crtorName,jdbcType=VARCHAR},
+      CRET_TIME = #{cretTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

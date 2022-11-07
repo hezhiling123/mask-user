@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mask.mask.user.biz.service.sys.sysoauth2.dao.SysOAauth2ClientDetailsMapper">
+  <resultMap id="BaseResultMap" type="cn.mask.mask.user.biz.service.sys.sysoauth2.pojo.po.SysOAauth2ClientDetailsPO">
+    <id column="CLIENT_ID" jdbcType="VARCHAR" property="clientId" />
+    <result column="RESOURCE_IDS" jdbcType="VARCHAR" property="resourceIds" />
+    <result column="CLIENT_SECRET" jdbcType="VARCHAR" property="clientSecret" />
+    <result column="SCOP" jdbcType="VARCHAR" property="scop" />
+    <result column="AUTHORIZED_GRANT_TYPES" jdbcType="VARCHAR" property="authorizedGrantTypes" />
+    <result column="WEB_SERVER_REDIRECT_URI" jdbcType="VARCHAR" property="webServerRedirectUri" />
+    <result column="AUTHORITIES" jdbcType="VARCHAR" property="authorities" />
+    <result column="ACCESS_TOKEN_VALIDITY" jdbcType="INTEGER" property="accessTokenValidity" />
+    <result column="REFRESH_TOKEN_VALIDITY" jdbcType="INTEGER" property="refreshTokenValidity" />
+    <result column="ADDITIONAL_INFORMATION" jdbcType="VARCHAR" property="additionalInformation" />
+    <result column="AUTOAPPROVE" jdbcType="VARCHAR" property="autoapprove" />
+    <result column="VALI_FLAG" jdbcType="BIT" property="valiFlag" />
+    <result column="UPDTER_ID" jdbcType="VARCHAR" property="updterId" />
+    <result column="UPDTER_NAME" jdbcType="VARCHAR" property="updterName" />
+    <result column="UPDT_TIME" jdbcType="TIMESTAMP" property="updtTime" />
+    <result column="CRTOR_ID" jdbcType="VARCHAR" property="crtorId" />
+    <result column="CRTOR_NAME" jdbcType="VARCHAR" property="crtorName" />
+    <result column="CRET_TIME" jdbcType="TIMESTAMP" property="cretTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CLIENT_ID, RESOURCE_IDS, CLIENT_SECRET, SCOP, AUTHORIZED_GRANT_TYPES, WEB_SERVER_REDIRECT_URI, 
+    AUTHORITIES, ACCESS_TOKEN_VALIDITY, REFRESH_TOKEN_VALIDITY, ADDITIONAL_INFORMATION, 
+    AUTOAPPROVE, VALI_FLAG, UPDTER_ID, UPDTER_NAME, UPDT_TIME, CRTOR_ID, CRTOR_NAME, 
+    CRET_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_oauth2_client_details
+    where CLIENT_ID = #{clientId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_oauth2_client_details
+    where CLIENT_ID = #{clientId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.mask.mask.user.biz.service.sys.sysoauth2.pojo.po.SysOAauth2ClientDetailsPO">
+    insert into sys_oauth2_client_details (CLIENT_ID, RESOURCE_IDS, CLIENT_SECRET, 
+      SCOP, AUTHORIZED_GRANT_TYPES, WEB_SERVER_REDIRECT_URI, 
+      AUTHORITIES, ACCESS_TOKEN_VALIDITY, REFRESH_TOKEN_VALIDITY, 
+      ADDITIONAL_INFORMATION, AUTOAPPROVE, VALI_FLAG, 
+      UPDTER_ID, UPDTER_NAME, UPDT_TIME, 
+      CRTOR_ID, CRTOR_NAME, CRET_TIME
+      )
+    values (#{clientId,jdbcType=VARCHAR}, #{resourceIds,jdbcType=VARCHAR}, #{clientSecret,jdbcType=VARCHAR}, 
+      #{scop,jdbcType=VARCHAR}, #{authorizedGrantTypes,jdbcType=VARCHAR}, #{webServerRedirectUri,jdbcType=VARCHAR}, 
+      #{authorities,jdbcType=VARCHAR}, #{accessTokenValidity,jdbcType=INTEGER}, #{refreshTokenValidity,jdbcType=INTEGER}, 
+      #{additionalInformation,jdbcType=VARCHAR}, #{autoapprove,jdbcType=VARCHAR}, #{valiFlag,jdbcType=BIT}, 
+      #{updterId,jdbcType=VARCHAR}, #{updterName,jdbcType=VARCHAR}, #{updtTime,jdbcType=TIMESTAMP}, 
+      #{crtorId,jdbcType=VARCHAR}, #{crtorName,jdbcType=VARCHAR}, #{cretTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.mask.mask.user.biz.service.sys.sysoauth2.pojo.po.SysOAauth2ClientDetailsPO">
+    insert into sys_oauth2_client_details
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="clientId != null">
+        CLIENT_ID,
+      </if>
+      <if test="resourceIds != null">
+        RESOURCE_IDS,
+      </if>
+      <if test="clientSecret != null">
+        CLIENT_SECRET,
+      </if>
+      <if test="scop != null">
+        SCOP,
+      </if>
+      <if test="authorizedGrantTypes != null">
+        AUTHORIZED_GRANT_TYPES,
+      </if>
+      <if test="webServerRedirectUri != null">
+        WEB_SERVER_REDIRECT_URI,
+      </if>
+      <if test="authorities != null">
+        AUTHORITIES,
+      </if>
+      <if test="accessTokenValidity != null">
+        ACCESS_TOKEN_VALIDITY,
+      </if>
+      <if test="refreshTokenValidity != null">
+        REFRESH_TOKEN_VALIDITY,
+      </if>
+      <if test="additionalInformation != null">
+        ADDITIONAL_INFORMATION,
+      </if>
+      <if test="autoapprove != null">
+        AUTOAPPROVE,
+      </if>
+      <if test="valiFlag != null">
+        VALI_FLAG,
+      </if>
+      <if test="updterId != null">
+        UPDTER_ID,
+      </if>
+      <if test="updterName != null">
+        UPDTER_NAME,
+      </if>
+      <if test="updtTime != null">
+        UPDT_TIME,
+      </if>
+      <if test="crtorId != null">
+        CRTOR_ID,
+      </if>
+      <if test="crtorName != null">
+        CRTOR_NAME,
+      </if>
+      <if test="cretTime != null">
+        CRET_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="clientId != null">
+        #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceIds != null">
+        #{resourceIds,jdbcType=VARCHAR},
+      </if>
+      <if test="clientSecret != null">
+        #{clientSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="scop != null">
+        #{scop,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizedGrantTypes != null">
+        #{authorizedGrantTypes,jdbcType=VARCHAR},
+      </if>
+      <if test="webServerRedirectUri != null">
+        #{webServerRedirectUri,jdbcType=VARCHAR},
+      </if>
+      <if test="authorities != null">
+        #{authorities,jdbcType=VARCHAR},
+      </if>
+      <if test="accessTokenValidity != null">
+        #{accessTokenValidity,jdbcType=INTEGER},
+      </if>
+      <if test="refreshTokenValidity != null">
+        #{refreshTokenValidity,jdbcType=INTEGER},
+      </if>
+      <if test="additionalInformation != null">
+        #{additionalInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="autoapprove != null">
+        #{autoapprove,jdbcType=VARCHAR},
+      </if>
+      <if test="valiFlag != null">
+        #{valiFlag,jdbcType=BIT},
+      </if>
+      <if test="updterId != null">
+        #{updterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updterName != null">
+        #{updterName,jdbcType=VARCHAR},
+      </if>
+      <if test="updtTime != null">
+        #{updtTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crtorId != null">
+        #{crtorId,jdbcType=VARCHAR},
+      </if>
+      <if test="crtorName != null">
+        #{crtorName,jdbcType=VARCHAR},
+      </if>
+      <if test="cretTime != null">
+        #{cretTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.mask.mask.user.biz.service.sys.sysoauth2.pojo.po.SysOAauth2ClientDetailsPO">
+    update sys_oauth2_client_details
+    <set>
+      <if test="resourceIds != null">
+        RESOURCE_IDS = #{resourceIds,jdbcType=VARCHAR},
+      </if>
+      <if test="clientSecret != null">
+        CLIENT_SECRET = #{clientSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="scop != null">
+        SCOP = #{scop,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizedGrantTypes != null">
+        AUTHORIZED_GRANT_TYPES = #{authorizedGrantTypes,jdbcType=VARCHAR},
+      </if>
+      <if test="webServerRedirectUri != null">
+        WEB_SERVER_REDIRECT_URI = #{webServerRedirectUri,jdbcType=VARCHAR},
+      </if>
+      <if test="authorities != null">
+        AUTHORITIES = #{authorities,jdbcType=VARCHAR},
+      </if>
+      <if test="accessTokenValidity != null">
+        ACCESS_TOKEN_VALIDITY = #{accessTokenValidity,jdbcType=INTEGER},
+      </if>
+      <if test="refreshTokenValidity != null">
+        REFRESH_TOKEN_VALIDITY = #{refreshTokenValidity,jdbcType=INTEGER},
+      </if>
+      <if test="additionalInformation != null">
+        ADDITIONAL_INFORMATION = #{additionalInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="autoapprove != null">
+        AUTOAPPROVE = #{autoapprove,jdbcType=VARCHAR},
+      </if>
+      <if test="valiFlag != null">
+        VALI_FLAG = #{valiFlag,jdbcType=BIT},
+      </if>
+      <if test="updterId != null">
+        UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updterName != null">
+        UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+      </if>
+      <if test="updtTime != null">
+        UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crtorId != null">
+        CRTOR_ID = #{crtorId,jdbcType=VARCHAR},
+      </if>
+      <if test="crtorName != null">
+        CRTOR_NAME = #{crtorName,jdbcType=VARCHAR},
+      </if>
+      <if test="cretTime != null">
+        CRET_TIME = #{cretTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where CLIENT_ID = #{clientId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.mask.mask.user.biz.service.sys.sysoauth2.pojo.po.SysOAauth2ClientDetailsPO">
+    update sys_oauth2_client_details
+    set RESOURCE_IDS = #{resourceIds,jdbcType=VARCHAR},
+      CLIENT_SECRET = #{clientSecret,jdbcType=VARCHAR},
+      SCOP = #{scop,jdbcType=VARCHAR},
+      AUTHORIZED_GRANT_TYPES = #{authorizedGrantTypes,jdbcType=VARCHAR},
+      WEB_SERVER_REDIRECT_URI = #{webServerRedirectUri,jdbcType=VARCHAR},
+      AUTHORITIES = #{authorities,jdbcType=VARCHAR},
+      ACCESS_TOKEN_VALIDITY = #{accessTokenValidity,jdbcType=INTEGER},
+      REFRESH_TOKEN_VALIDITY = #{refreshTokenValidity,jdbcType=INTEGER},
+      ADDITIONAL_INFORMATION = #{additionalInformation,jdbcType=VARCHAR},
+      AUTOAPPROVE = #{autoapprove,jdbcType=VARCHAR},
+      VALI_FLAG = #{valiFlag,jdbcType=BIT},
+      UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+      UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+      UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
+      CRTOR_ID = #{crtorId,jdbcType=VARCHAR},
+      CRTOR_NAME = #{crtorName,jdbcType=VARCHAR},
+      CRET_TIME = #{cretTime,jdbcType=TIMESTAMP}
+    where CLIENT_ID = #{clientId,jdbcType=VARCHAR}
+  </update>
+</mapper>

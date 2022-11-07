@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mask.mask.user.biz.service.sys.sysrole.dao.SysRoleMapper">
+    <resultMap id="BaseResultMap" type="cn.mask.mask.user.biz.service.sys.sysrole.pojo.po.SysRolePO">
+        <id column="ROLE_ID" jdbcType="BIGINT" property="roleId"/>
+        <result column="ROLD_NAME" jdbcType="VARCHAR" property="roleName"/>
+        <result column="ROLE_CODE" jdbcType="VARCHAR" property="roleCode"/>
+        <result column="ROLE_DESC" jdbcType="VARCHAR" property="roleDesc"/>
+        <result column="VALI_FLAG" jdbcType="CHAR" property="valiFlag"/>
+        <result column="UPDTER_ID" jdbcType="VARCHAR" property="updterId"/>
+        <result column="UPDTER_NAME" jdbcType="VARCHAR" property="updterName"/>
+        <result column="UPDT_TIME" jdbcType="TIMESTAMP" property="updtTime"/>
+        <result column="CRTOR_ID" jdbcType="VARCHAR" property="crtorId"/>
+        <result column="CRTOR_NAME" jdbcType="VARCHAR" property="crtorName"/>
+        <result column="CRET_TIME" jdbcType="TIMESTAMP" property="cretTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ROLE_ID, ROLD_NAME, ROLE_CODE, ROLE_DESC, VALI_FLAG, UPDTER_ID, UPDTER_NAME, UPDT_TIME, 
+    CRTOR_ID, CRTOR_NAME, CRET_TIME
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role
+        where ROLE_ID = #{roleId,jdbcType=BIGINT}
+    </select>
+    <select id="listSysRole" resultType="cn.mask.mask.user.biz.service.sys.sysrole.pojo.po.SysRolePO">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role
+        <where>
+            <if test="roleName != null">
+                ROLD_NAME = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleCode != null">
+                ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="roleDesc != null">
+                ROLE_DESC = #{roleDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="valiFlag != null">
+                VALI_FLAG = #{valiFlag,jdbcType=CHAR},
+            </if>
+            <if test="updterId != null">
+                UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+            </if>
+            <if test="updterName != null">
+                UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+            </if>
+            <if test="updtTime != null">
+                UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="crtorId != null">
+                CRTOR_ID = #{crtorId,jdbcType=VARCHAR},
+            </if>
+            <if test="crtorName != null">
+                CRTOR_NAME = #{crtorName,jdbcType=VARCHAR},
+            </if>
+            <if test="cretTime != null">
+                CRET_TIME = #{cretTime,jdbcType=TIMESTAMP},
+            </if>
+        </where>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_role
+    where ROLE_ID = #{roleId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="cn.mask.mask.user.biz.service.sys.sysrole.pojo.po.SysRolePO">
+    insert into sys_role (ROLE_ID, ROLD_NAME, ROLE_CODE, 
+      ROLE_DESC, VALI_FLAG, UPDTER_ID, 
+      UPDTER_NAME, UPDT_TIME, CRTOR_ID, 
+      CRTOR_NAME, CRET_TIME)
+    values (#{roleId,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR}, 
+      #{roleDesc,jdbcType=VARCHAR}, #{valiFlag,jdbcType=CHAR}, #{updterId,jdbcType=VARCHAR}, 
+      #{updterName,jdbcType=VARCHAR}, #{updtTime,jdbcType=TIMESTAMP}, #{crtorId,jdbcType=VARCHAR}, 
+      #{crtorName,jdbcType=VARCHAR}, #{cretTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="cn.mask.mask.user.biz.service.sys.sysrole.pojo.po.SysRolePO">
+        insert into sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                ROLE_ID,
+            </if>
+            <if test="roleName != null">
+                ROLD_NAME,
+            </if>
+            <if test="roleCode != null">
+                ROLE_CODE,
+            </if>
+            <if test="roleDesc != null">
+                ROLE_DESC,
+            </if>
+            <if test="valiFlag != null">
+                VALI_FLAG,
+            </if>
+            <if test="updterId != null">
+                UPDTER_ID,
+            </if>
+            <if test="updterName != null">
+                UPDTER_NAME,
+            </if>
+            <if test="updtTime != null">
+                UPDT_TIME,
+            </if>
+            <if test="crtorId != null">
+                CRTOR_ID,
+            </if>
+            <if test="crtorName != null">
+                CRTOR_NAME,
+            </if>
+            <if test="cretTime != null">
+                CRET_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                #{roleId,jdbcType=BIGINT},
+            </if>
+            <if test="roleName != null">
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleCode != null">
+                #{roleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="roleDesc != null">
+                #{roleDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="valiFlag != null">
+                #{valiFlag,jdbcType=CHAR},
+            </if>
+            <if test="updterId != null">
+                #{updterId,jdbcType=VARCHAR},
+            </if>
+            <if test="updterName != null">
+                #{updterName,jdbcType=VARCHAR},
+            </if>
+            <if test="updtTime != null">
+                #{updtTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="crtorId != null">
+                #{crtorId,jdbcType=VARCHAR},
+            </if>
+            <if test="crtorName != null">
+                #{crtorName,jdbcType=VARCHAR},
+            </if>
+            <if test="cretTime != null">
+                #{cretTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="cn.mask.mask.user.biz.service.sys.sysrole.pojo.po.SysRolePO">
+        update sys_role
+        <set>
+            <if test="roleName != null">
+                ROLD_NAME = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleCode != null">
+                ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="roleDesc != null">
+                ROLE_DESC = #{roleDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="valiFlag != null">
+                VALI_FLAG = #{valiFlag,jdbcType=CHAR},
+            </if>
+            <if test="updterId != null">
+                UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+            </if>
+            <if test="updterName != null">
+                UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+            </if>
+            <if test="updtTime != null">
+                UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="crtorId != null">
+                CRTOR_ID = #{crtorId,jdbcType=VARCHAR},
+            </if>
+            <if test="crtorName != null">
+                CRTOR_NAME = #{crtorName,jdbcType=VARCHAR},
+            </if>
+            <if test="cretTime != null">
+                CRET_TIME = #{cretTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ROLE_ID = #{roleId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.mask.mask.user.biz.service.sys.sysrole.pojo.po.SysRolePO">
+    update sys_role
+    set ROLD_NAME = #{roleName,jdbcType=VARCHAR},
+      ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+      ROLE_DESC = #{roleDesc,jdbcType=VARCHAR},
+      VALI_FLAG = #{valiFlag,jdbcType=CHAR},
+      UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+      UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+      UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
+      CRTOR_ID = #{crtorId,jdbcType=VARCHAR},
+      CRTOR_NAME = #{crtorName,jdbcType=VARCHAR},
+      CRET_TIME = #{cretTime,jdbcType=TIMESTAMP}
+    where ROLE_ID = #{roleId,jdbcType=BIGINT}
+  </update>
+</mapper>
