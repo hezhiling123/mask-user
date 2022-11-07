@@ -4,6 +4,7 @@ import cn.mask.mask.user.api.register.enums.RegTypeEnum;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -29,6 +30,6 @@ public class RegisterInfoDTO implements Serializable {
     /**
      * 注册方式
      */
-    @NotEmpty(message = "注册类型不能为空")
+    @NotNull(message = "注册类型不能为空")
     private RegTypeEnum regType;
 }

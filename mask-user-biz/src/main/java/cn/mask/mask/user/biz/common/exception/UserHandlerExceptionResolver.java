@@ -1,10 +1,11 @@
 package cn.mask.mask.user.biz.common.exception;
 
 import cn.mask.mask.common.core.framework.web.WrapperResponse;
+import cn.mask.mask.common.core.framework.web.enums.ResultCode;
 import cn.mask.mask.common.core.framework.web.exception.MaskException;
-import cn.mask.mask.common.core.framework.web.exception.ResultStatusCode;
 import org.springframework.core.annotation.Order;
 import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,7 +31,7 @@ public class UserHandlerExceptionResolver {
      */
     @ExceptionHandler(Exception.class)
     private WrapperResponse<Object> handleException(Exception e) {
-        return WrapperResponse.error(ResultStatusCode.HTTP_ERROR_500.getCode(), e.getMessage(), null);
+        return WrapperResponse.error(ResultCode.SYS_ERR, e.getMessage(), null);
     }
 
     /**
@@ -41,7 +42,7 @@ public class UserHandlerExceptionResolver {
      */
     @ExceptionHandler(AccessException.class)
     private WrapperResponse<Object> handleAccessException(AccessException e) {
-        return WrapperResponse.error(ResultStatusCode.UNAUTHO_ERROR.getCode(), e.getMessage(), null);
+        return WrapperResponse.error(ResultCode.ACCESS_PERMISSION_EXCEPTION, e.getMessage(), null);
     }
 
     /**
@@ -52,7 +53,18 @@ public class UserHandlerExceptionResolver {
      */
     @ExceptionHandler(MaskException.class)
     private WrapperResponse<Object> handleMaskException(MaskException e) {
-        return WrapperResponse.error(e.getCode(), e.getMessage(), null);
+        return WrapperResponse.error(e.getCode(), e.getMsg(), null);
+    }
+
+    /**
+     * 空指针
+     *
+     * @param e {@link NullPointerException}
+     * @return {@link WrapperResponse}
+     */
+    @ExceptionHandler(NullPointerException.class)
+    private WrapperResponse<Object> handleNullPointException(NullPointerException e) {
+        return WrapperResponse.error(ResultCode.NULL_REQUIRED_PARAMETER, e.getMessage(), null);
     }
 
     /**
@@ -63,7 +75,7 @@ public class UserHandlerExceptionResolver {
      */
     @ExceptionHandler(IllegalArgumentException.class)
     private WrapperResponse<Object> handleIllegalArgumentException(IllegalArgumentException e) {
-        return WrapperResponse.error(ResultStatusCode.HTTP_ERROR_500.getCode(), e.getMessage(), null);
+        return WrapperResponse.error(ResultCode.REQUEST_PARAMETER_ERR, e.getMessage(), null);
     }
 
     /**
@@ -74,7 +86,12 @@ public class UserHandlerExceptionResolver {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     private WrapperResponse<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        return WrapperResponse.error(ResultStatusCode.HTTP_ERROR_500.getCode(), e.getMessage(), null);
+        FieldError fieldError = e.getBindingResult().getFieldError();
+        String msg = null;
+        if (fieldError != null) {
+            msg = fieldError.getDefaultMessage();
+        }
+        return WrapperResponse.error(ResultCode.INVALID_METHOD_ARGUMENT, msg, null);
     }
 
     /**
@@ -85,6 +102,6 @@ public class UserHandlerExceptionResolver {
      */
     @ExceptionHandler(BindException.class)
     private WrapperResponse<Object> handleBindException(BindException e) {
-        return WrapperResponse.error(ResultStatusCode.HTTP_ERROR_500.getCode(), e.getMessage(), null);
+        return WrapperResponse.error(ResultCode.BIND_EXCEPTION, e.getMessage(), null);
     }
 }

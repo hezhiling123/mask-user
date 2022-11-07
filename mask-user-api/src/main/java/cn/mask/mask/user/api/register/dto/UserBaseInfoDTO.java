@@ -3,6 +3,7 @@ package cn.mask.mask.user.api.register.dto;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -32,7 +33,7 @@ public class UserBaseInfoDTO implements Serializable {
     /**
      * 性别
      */
-    @NotEmpty(message = "用户性别不能为空")
+    @NotNull(message = "用户性别不能为空")
     private Integer gender;
 
     /**

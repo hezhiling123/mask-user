@@ -1,30 +1,19 @@
 package cn.mask.mask.user.biz.service.login.service;
 
-import cn.binarywang.wx.miniapp.api.WxMaService;
-import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.mask.mask.common.core.framework.web.WrapperResponse;
-import cn.mask.mask.common.core.framework.web.constant.ResponseCodeConstant;
+import cn.mask.mask.common.core.framework.web.enums.ResultCode;
 import cn.mask.mask.common.core.framework.web.exception.MaskException;
-import cn.mask.mask.common.core.framework.web.exception.ResultStatusCode;
 import cn.mask.mask.user.api.login.dto.WeiXinUserInfo;
-import cn.mask.mask.user.api.login.dto.WeiXinLoginInfo;
 import cn.mask.mask.user.api.login.service.LoginService;
-import cn.mask.mask.user.api.user.dto.UserDTO;
-import cn.mask.mask.user.biz.common.constant.CommonConstant;
-import cn.mask.mask.user.biz.service.user.dao.UserMapper;
-import cn.mask.mask.user.biz.service.user.pojo.po.UserPO;
-import com.alibaba.fastjson.JSONObject;
+import cn.mask.mask.user.biz.service.user.bo.IUserBO;
+import cn.mask.mask.user.biz.service.user.pojo.enums.UserStatusEnum;
+import cn.mask.mask.user.biz.service.user.pojo.po.UserBasePO;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author mask
@@ -33,51 +22,15 @@ import java.util.Map;
 @RestController
 @RequestMapping("/user/mask/service/login")
 public class LoginServiceImpl implements LoginService {
-
     @Resource
-    private UserMapper userMapper;
+    private IUserBO IUserBO;
 
-    @Resource
-    private WxMaService wxService;
-
-    /**
-     * 微信登录
-     *
-     * @param weiXinLoginInfo 请求内容，{ code: xxx, userInfo: xxx }
-     * @return 登录结果
-     **/
-    @Override
-    @PostMapping("loginByWeiXin")
-    public WrapperResponse<UserDTO> loginByWeiXin(@RequestBody WeiXinLoginInfo weiXinLoginInfo) throws MaskException {
-        String code = weiXinLoginInfo.getCode();
-        WeiXinUserInfo WeiXinUserInfo = weiXinLoginInfo.getWeiXinUserInfo();
-        log.info(code);
-        log.info(WeiXinUserInfo.toString());
-        if (code == null) {
-            return WrapperResponse.error(ResultStatusCode.HTTP_ERROR_400.getCode(), "微信认证code为空，无法登录", null);
-        }
-
-        String sessionKey;
-        String openId;
-        try {
-            WxMaJscode2SessionResult result = this.wxService.getUserService().getSessionInfo(code);
-            sessionKey = result.getSessionKey();
-            openId = result.getOpenid();
-        } catch (Exception e) {
-            throw new MaskException(ResultStatusCode.HTTP_ERROR_500.getCode(), "调起微信认证服务失败" + e.getMessage());
-        }
-
-        if (StringUtils.isBlank(sessionKey) || StringUtils.isBlank(openId)) {
-            throw new MaskException(ResultStatusCode.HTTP_ERROR_500.getCode(), "微信认证服务返回为空");
-        }
-        return WrapperResponse.success(new UserDTO());
-    }
 
     /**
      * 通过token登录
      *
      * @param tokenStr token
-     * @return {@link UserPO}
+     * @return {@link WeiXinUserInfo}
      */
     @Override
     @PostMapping("login")
@@ -94,37 +47,19 @@ public class LoginServiceImpl implements LoginService {
     @Override
     @PostMapping("loginByToken")
     public WrapperResponse<WeiXinUserInfo> loginByToken(String tokenStr) throws MaskException {
-        log.info(tokenStr);
-        UsernamePasswordToken usernamePasswordToken = JSONObject.parseObject(tokenStr, UsernamePasswordToken.class);
-        UserPO user = null;
-        String loginAccount;
-        String password;
-        Map<String, Object> paramMap = new HashMap<>();
-        //微信登录
-        loginAccount = usernamePasswordToken.getUsername();
-        password = new String(usernamePasswordToken.getPassword());
-        log.info(password);
-        paramMap.put("loginAccount", loginAccount);
-//        String md5Password = MD5Util.generateMD5(password, "1");
-        checkUserStatus(user);
         return null;
     }
 
-    private void checkUserStatus(UserPO user) throws MaskException {
+    private void checkUserStatus(UserBasePO user) throws MaskException {
         // 用户未激活
-        if (CommonConstant.USER_STATUS_NO_ACTIVATION.equals(user.getStatus())) {
-            throw new MaskException(ResultStatusCode.NOT_PARAM_USER_OR_ERROR_PWD,
-                    ResponseCodeConstant.USER_LOGIN_FAIL_NO_ACTIVATION_MSG);
-        }
+        //todo
         // 用户已冻结
-        if (CommonConstant.USER_STATUS_FREEZE.equals(user.getStatus())) {
-            throw new MaskException(ResultStatusCode.USER_FROZEN,
-                    ResponseCodeConstant.USER_LOGIN_FAIL_FREEZEED_MSG);
+        if (UserStatusEnum.FROZEN.getStatus().equals(user.getStatus())) {
+            throw new MaskException(ResultCode.USER_ACCOUNT_FROZEN);
         }
         // 用户已作废
-        if (CommonConstant.USER_STATUS_CANCEL.equals(user.getStatus())) {
-            throw new MaskException(ResultStatusCode.USER_FROZEN,
-                    ResponseCodeConstant.USER_LOGIN_FAIL_CANCELED_MSG);
+        if (UserStatusEnum.CANCEL.getStatus().equals(user.getStatus())) {
+            throw new MaskException(ResultCode.USER_ACCOUNT_CANCEL);
         }
     }
 }

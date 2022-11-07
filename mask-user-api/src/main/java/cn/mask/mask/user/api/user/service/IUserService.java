@@ -6,6 +6,9 @@ import cn.mask.mask.user.api.login.dto.WeiXinUserInfo;
 import cn.mask.mask.user.api.register.dto.UserBaseInfoDTO;
 import cn.mask.mask.user.api.user.dto.QUserDTO;
 
+/**
+ * @author hezhiling
+ */
 public interface IUserService {
     /**
      * 创建系统用户
@@ -20,7 +23,7 @@ public interface IUserService {
      * @param userId    用户id
      * @return  用户信息 {@link WeiXinUserInfo}
      */
-    WrapperResponse<WeiXinUserInfo> getUserByUserId(String userId);
+    WrapperResponse<UserBaseInfoDTO> getUserByUserId(String userId) throws MaskException;
 
     /**
      * 模糊查询用户信息

@@ -31,7 +31,6 @@
     <modules>
         <module>mask-user-api</module>
         <module>mask-user-biz</module>
-        <module>mask-user-dubbo</module>
     </modules>
 
     <dependencies>

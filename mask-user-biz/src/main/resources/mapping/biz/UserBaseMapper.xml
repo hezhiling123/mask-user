@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mask.mask.user.biz.service.user.dao.UserBaseMapper">
+    <resultMap id="BaseResultMap" type="cn.mask.mask.user.biz.service.user.pojo.po.UserBasePO">
+        <id column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+        <result column="USERNAME" jdbcType="VARCHAR" property="username"/>
+        <result column="GENDER" jdbcType="INTEGER" property="gender"/>
+        <result column="BITRH" jdbcType="DATE" property="bitrh"/>
+        <result column="TEL" jdbcType="VARCHAR" property="tel"/>
+        <result column="EMAIL" jdbcType="VARCHAR" property="email"/>
+        <result column="AVATAR_URL" jdbcType="VARCHAR" property="avatarUrl"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="CRTE_APP_ID" jdbcType="VARCHAR" property="crteAppId"/>
+        <result column="CRTE_TYPE" jdbcType="VARCHAR" property="crteType"/>
+        <result column="CRTOR_ID" jdbcType="VARCHAR" property="crtorId"/>
+        <result column="CRTOR_NAME" jdbcType="VARCHAR" property="crtorName"/>
+        <result column="CRTE_TIME" jdbcType="TIMESTAMP" property="crteTime"/>
+        <result column="UPDTER_ID" jdbcType="VARCHAR" property="updterId"/>
+        <result column="UPDTER_NAME" jdbcType="VARCHAR" property="updterName"/>
+        <result column="UPDT_TIME" jdbcType="TIMESTAMP" property="updtTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    USER_ID, USERNAME, GENDER, BITRH, TEL, EMAIL, AVATAR_URL, STATUS, CRTE_APP_ID, CRTE_TYPE, 
+    CRTOR_ID, CRTOR_NAME, CRTE_TIME, UPDTER_ID, UPDTER_NAME, UPDT_TIME
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_base
+        where USER_ID = #{userId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="listUserByQUserBaseDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_base
+        <where>
+            <trim suffixOverrides=" and ">
+                <if test="username != null and username != ''">
+                    USERNAME = #{username,jdbcType=VARCHAR}
+                </if>
+                <if test="userId != null and userId != ''">
+                    USER_ID = #{userId,jdbcType=VARCHAR}
+                </if>
+                <if test="tel != null and tel != ''">
+                    TEL = #{tel}
+                </if>
+                <if test="email != null and email != ''">
+                    EMAIL = #{email,jdbcType=VARCHAR}
+                </if>
+<!--                <if test="userStatusEnumList != null and userStatusEnumList.size() > 0">-->
+<!--                    <foreach collection="userStatusEnumList" item="statusEnum" index="index" open="(" separator=","-->
+<!--                             close=")">-->
+<!--                        #{statusEnum.status}-->
+<!--                    </foreach>-->
+<!--                </if>-->
+            </trim>
+        </where>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_base
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="cn.mask.mask.user.biz.service.user.pojo.po.UserBasePO">
+    insert into user_base (USER_ID, USERNAME, GENDER, 
+      BITRH, TEL, EMAIL, AVATAR_URL, 
+      STATUS, CRTE_APP_ID, CRTE_TYPE, 
+      CRTOR_ID, CRTOR_NAME, CRTE_TIME, 
+      UPDTER_ID, UPDTER_NAME, UPDT_TIME
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, 
+      #{bitrh,jdbcType=DATE}, #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{crteAppId,jdbcType=VARCHAR}, #{crteType,jdbcType=VARCHAR}, 
+      #{crtorId,jdbcType=VARCHAR}, #{crtorName,jdbcType=VARCHAR}, #{crteTime,jdbcType=TIMESTAMP}, 
+      #{updterId,jdbcType=VARCHAR}, #{updterName,jdbcType=VARCHAR}, #{updtTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="cn.mask.mask.user.biz.service.user.pojo.po.UserBasePO">
+        insert into user_base
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="username != null">
+                USERNAME,
+            </if>
+            <if test="gender != null">
+                GENDER,
+            </if>
+            <if test="bitrh != null">
+                BITRH,
+            </if>
+            <if test="tel != null">
+                TEL,
+            </if>
+            <if test="email != null">
+                EMAIL,
+            </if>
+            <if test="avatarUrl != null">
+                AVATAR_URL,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="crteAppId != null">
+                CRTE_APP_ID,
+            </if>
+            <if test="crteType != null">
+                CRTE_TYPE,
+            </if>
+            <if test="crtorId != null">
+                CRTOR_ID,
+            </if>
+            <if test="crtorName != null">
+                CRTOR_NAME,
+            </if>
+            <if test="crteTime != null">
+                CRTE_TIME,
+            </if>
+            <if test="updterId != null">
+                UPDTER_ID,
+            </if>
+            <if test="updterName != null">
+                UPDTER_NAME,
+            </if>
+            <if test="updtTime != null">
+                UPDT_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=INTEGER},
+            </if>
+            <if test="bitrh != null">
+                #{bitrh,jdbcType=DATE},
+            </if>
+            <if test="tel != null">
+                #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="avatarUrl != null">
+                #{avatarUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="crteAppId != null">
+                #{crteAppId,jdbcType=VARCHAR},
+            </if>
+            <if test="crteType != null">
+                #{crteType,jdbcType=VARCHAR},
+            </if>
+            <if test="crtorId != null">
+                #{crtorId,jdbcType=VARCHAR},
+            </if>
+            <if test="crtorName != null">
+                #{crtorName,jdbcType=VARCHAR},
+            </if>
+            <if test="crteTime != null">
+                #{crteTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updterId != null">
+                #{updterId,jdbcType=VARCHAR},
+            </if>
+            <if test="updterName != null">
+                #{updterName,jdbcType=VARCHAR},
+            </if>
+            <if test="updtTime != null">
+                #{updtTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.mask.mask.user.biz.service.user.pojo.po.UserBasePO">
+        update user_base
+        <set>
+            <if test="username != null">
+                USERNAME = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                GENDER = #{gender,jdbcType=INTEGER},
+            </if>
+            <if test="bitrh != null">
+                BITRH = #{bitrh,jdbcType=DATE},
+            </if>
+            <if test="tel != null">
+                TEL = #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                EMAIL = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="avatarUrl != null">
+                AVATAR_URL = #{avatarUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="crteAppId != null">
+                CRTE_APP_ID = #{crteAppId,jdbcType=VARCHAR},
+            </if>
+            <if test="crteType != null">
+                CRTE_TYPE = #{crteType,jdbcType=VARCHAR},
+            </if>
+            <if test="crtorId != null">
+                CRTOR_ID = #{crtorId,jdbcType=VARCHAR},
+            </if>
+            <if test="crtorName != null">
+                CRTOR_NAME = #{crtorName,jdbcType=VARCHAR},
+            </if>
+            <if test="crteTime != null">
+                CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updterId != null">
+                UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+            </if>
+            <if test="updterName != null">
+                UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+            </if>
+            <if test="updtTime != null">
+                UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where USER_ID = #{userId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.mask.mask.user.biz.service.user.pojo.po.UserBasePO">
+    update user_base
+    set USERNAME = #{username,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=INTEGER},
+      BITRH = #{bitrh,jdbcType=DATE},
+      TEL = #{tel,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      AVATAR_URL = #{avatarUrl,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CRTE_APP_ID = #{crteAppId,jdbcType=VARCHAR},
+      CRTE_TYPE = #{crteType,jdbcType=VARCHAR},
+      CRTOR_ID = #{crtorId,jdbcType=VARCHAR},
+      CRTOR_NAME = #{crtorName,jdbcType=VARCHAR},
+      CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
+      UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+      UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+      UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP}
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

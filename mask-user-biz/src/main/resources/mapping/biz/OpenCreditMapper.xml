@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mask.mask.user.biz.service.user.dao.OpenCreditMapper">
+    <resultMap id="BaseResultMap" type="cn.mask.mask.user.biz.service.user.pojo.po.OpenCreditPO">
+        <id column="ID" jdbcType="CHAR" property="id"/>
+        <result column="USER_ID" jdbcType="CHAR" property="userId"/>
+        <result column="USER_NAME" jdbcType="VARCHAR" property="userName"/>
+        <result column="OPEN_ID" jdbcType="VARCHAR" property="openId"/>
+        <result column="BIND_TYPE" jdbcType="VARCHAR" property="bindType"/>
+        <result column="PHONE" jdbcType="VARCHAR" property="phone"/>
+        <result column="REFRESH_TOKEN" jdbcType="VARCHAR" property="refreshToken"/>
+        <result column="EXPIRES_IN" jdbcType="VARCHAR" property="expiresIn"/>
+        <result column="ACCESS_TOKEN" jdbcType="VARCHAR" property="accessToken"/>
+        <result column="RE_EXPIRES_IN" jdbcType="VARCHAR" property="reExpiresIn"/>
+        <result column="CRTOR_ID" jdbcType="VARCHAR" property="crtorId"/>
+        <result column="CRTOR_NAME" jdbcType="VARCHAR" property="crtorName"/>
+        <result column="CRTE_TIME" jdbcType="TIMESTAMP" property="crteTime"/>
+        <result column="UPDTER_ID" jdbcType="VARCHAR" property="updterId"/>
+        <result column="UPDTER_NAME" jdbcType="VARCHAR" property="updterName"/>
+        <result column="UPDT_TIME" jdbcType="TIMESTAMP" property="updtTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, USER_ID, USER_NAME, OPEN_ID, BIND_TYPE, PHONE, REFRESH_TOKEN, EXPIRES_IN, ACCESS_TOKEN, 
+    RE_EXPIRES_IN, CRTOR_ID, CRTOR_NAME, CRTE_TIME, UPDTER_ID, UPDTER_NAME, UPDT_TIME
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from open_credit_d
+        where ID = #{id,jdbcType=CHAR}
+    </select>
+
+    <select id="listOpenCredit" resultType="cn.mask.mask.user.biz.service.user.pojo.po.OpenCreditPO">
+        select
+        <include refid="Base_Column_List"/>
+        from open_credit_d
+        <where>
+            <if test="userId != null and userId != ''">
+                AND USER_ID = #{userId}
+            </if>
+            <if test="openId != null and openId != ''">
+                AND OPEN_ID = #{openId}
+            </if>
+            <if test="bindType != null and bindType != ''">
+                AND BIND_TYPE= #{bindType}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from open_credit_d
+    where ID = #{id,jdbcType=CHAR}
+  </delete>
+    <insert id="insert" parameterType="cn.mask.mask.user.biz.service.user.pojo.po.OpenCreditPO">
+    insert into open_credit_d (ID, USER_ID, USER_NAME, 
+      OPEN_ID, BIND_TYPE, PHONE, 
+      REFRESH_TOKEN, EXPIRES_IN, ACCESS_TOKEN, 
+      RE_EXPIRES_IN, CRTOR_ID, CRTOR_NAME, 
+      CRTE_TIME, UPDTER_ID, UPDTER_NAME, 
+      UPDT_TIME)
+    values (#{id,jdbcType=CHAR}, #{userId,jdbcType=CHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{openId,jdbcType=VARCHAR}, #{bindType,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{refreshToken,jdbcType=VARCHAR}, #{expiresIn,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR}, 
+      #{reExpiresIn,jdbcType=VARCHAR}, #{crtorId,jdbcType=VARCHAR}, #{crtorName,jdbcType=VARCHAR}, 
+      now(), #{updterId,jdbcType=VARCHAR}, #{updterName,jdbcType=VARCHAR},
+      #{updtTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="cn.mask.mask.user.biz.service.user.pojo.po.OpenCreditPO">
+        insert into open_credit_d
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="userName != null">
+                USER_NAME,
+            </if>
+            <if test="openId != null">
+                OPEN_ID,
+            </if>
+            <if test="bindType != null">
+                BIND_TYPE,
+            </if>
+            <if test="phone != null">
+                PHONE,
+            </if>
+            <if test="refreshToken != null">
+                REFRESH_TOKEN,
+            </if>
+            <if test="expiresIn != null">
+                EXPIRES_IN,
+            </if>
+            <if test="accessToken != null">
+                ACCESS_TOKEN,
+            </if>
+            <if test="reExpiresIn != null">
+                RE_EXPIRES_IN,
+            </if>
+            <if test="crtorId != null">
+                CRTOR_ID,
+            </if>
+            <if test="crtorName != null">
+                CRTOR_NAME,
+            </if>
+            <if test="crteTime != null">
+                CRTE_TIME,
+            </if>
+            <if test="updterId != null">
+                UPDTER_ID,
+            </if>
+            <if test="updterName != null">
+                UPDTER_NAME,
+            </if>
+            <if test="updtTime != null">
+                UPDT_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=CHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=CHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null">
+                #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="bindType != null">
+                #{bindType,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="refreshToken != null">
+                #{refreshToken,jdbcType=VARCHAR},
+            </if>
+            <if test="expiresIn != null">
+                #{expiresIn,jdbcType=VARCHAR},
+            </if>
+            <if test="accessToken != null">
+                #{accessToken,jdbcType=VARCHAR},
+            </if>
+            <if test="reExpiresIn != null">
+                #{reExpiresIn,jdbcType=VARCHAR},
+            </if>
+            <if test="crtorId != null">
+                #{crtorId,jdbcType=VARCHAR},
+            </if>
+            <if test="crtorName != null">
+                #{crtorName,jdbcType=VARCHAR},
+            </if>
+            <if test="crteTime != null">
+                #{crteTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updterId != null">
+                #{updterId,jdbcType=VARCHAR},
+            </if>
+            <if test="updterName != null">
+                #{updterName,jdbcType=VARCHAR},
+            </if>
+            <if test="updtTime != null">
+                #{updtTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.mask.mask.user.biz.service.user.pojo.po.OpenCreditPO">
+        update open_credit_d
+        <set>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=CHAR},
+            </if>
+            <if test="userName != null">
+                USER_NAME = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null">
+                OPEN_ID = #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="bindType != null">
+                BIND_TYPE = #{bindType,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                PHONE = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="refreshToken != null">
+                REFRESH_TOKEN = #{refreshToken,jdbcType=VARCHAR},
+            </if>
+            <if test="expiresIn != null">
+                EXPIRES_IN = #{expiresIn,jdbcType=VARCHAR},
+            </if>
+            <if test="accessToken != null">
+                ACCESS_TOKEN = #{accessToken,jdbcType=VARCHAR},
+            </if>
+            <if test="reExpiresIn != null">
+                RE_EXPIRES_IN = #{reExpiresIn,jdbcType=VARCHAR},
+            </if>
+            <if test="crtorId != null">
+                CRTOR_ID = #{crtorId,jdbcType=VARCHAR},
+            </if>
+            <if test="crtorName != null">
+                CRTOR_NAME = #{crtorName,jdbcType=VARCHAR},
+            </if>
+            <if test="crteTime != null">
+                CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updterId != null">
+                UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+            </if>
+            <if test="updterName != null">
+                UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+            </if>
+            <if test="updtTime != null">
+                UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=CHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.mask.mask.user.biz.service.user.pojo.po.OpenCreditPO">
+    update open_credit_d
+    set USER_ID = #{userId,jdbcType=CHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      OPEN_ID = #{openId,jdbcType=VARCHAR},
+      BIND_TYPE = #{bindType,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      REFRESH_TOKEN = #{refreshToken,jdbcType=VARCHAR},
+      EXPIRES_IN = #{expiresIn,jdbcType=VARCHAR},
+      ACCESS_TOKEN = #{accessToken,jdbcType=VARCHAR},
+      RE_EXPIRES_IN = #{reExpiresIn,jdbcType=VARCHAR},
+      CRTOR_ID = #{crtorId,jdbcType=VARCHAR},
+      CRTOR_NAME = #{crtorName,jdbcType=VARCHAR},
+      CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
+      UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+      UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+      UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+</mapper>
