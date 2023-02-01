@@ -10,16 +10,16 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 42.192.182.126:8848
+        server-addr: 47.95.192.141:8848
         namespace: 86381884-86d1-481e-8c08-c92d6ef1e80e
         group: dev
     sentinel:
       transport:
-        dashboard: 42.192.182.126:8858
+        dashboard: 47.95.192.141:8858
       eager: true
       web-context-unify: true
   redis:
-    host: 42.192.182.126
+    host: 47.95.192.141
     port: 6379
     password: 1659868245
   zipkin:
@@ -66,11 +66,11 @@ dubbo:
     name: dubbo
     port: -1
   registry:
-    address: spring-cloud://42.192.182.126
+    address: spring-cloud://47.95.192.141
 csp:
   sentinel:
     dashboard:
-      server: 42.192.182.126:8858
+      server: 47.95.192.141:8858
 
 management:
   endpoint:
