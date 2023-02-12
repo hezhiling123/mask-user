@@ -118,8 +118,8 @@ public abstract class AbstractRegisterBO implements RegisterBO {
         OpenCreditPO openCreditPO = new OpenCreditPO();
         BeanUtils.copyProperties(registerDTO.getUserBaseInfo(), openCreditPO);
         openCreditPO.setId(String.valueOf(defaultUidGenerator.getUID()));
-        openCreditPO.setCrtorId(registerDTO.getUserBaseInfo().getUserId());
-        openCreditPO.setCrtorName(registerDTO.getUserBaseInfo().getUsername());
+        openCreditPO.setCrterId(registerDTO.getUserBaseInfo().getUserId());
+        openCreditPO.setCrterName(registerDTO.getUserBaseInfo().getUsername());
         return openCreditPO;
     }
 }

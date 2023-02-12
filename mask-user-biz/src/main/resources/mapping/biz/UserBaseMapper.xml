@@ -12,8 +12,8 @@
         <result column="STATUS" jdbcType="VARCHAR" property="status"/>
         <result column="CRTE_APP_ID" jdbcType="VARCHAR" property="crteAppId"/>
         <result column="CRTE_TYPE" jdbcType="VARCHAR" property="crteType"/>
-        <result column="CRTOR_ID" jdbcType="VARCHAR" property="crtorId"/>
-        <result column="CRTOR_NAME" jdbcType="VARCHAR" property="crtorName"/>
+        <result column="CRTER_ID" jdbcType="VARCHAR" property="crterId"/>
+        <result column="CRTER_NAME" jdbcType="VARCHAR" property="crterName"/>
         <result column="CRTE_TIME" jdbcType="TIMESTAMP" property="crteTime"/>
         <result column="UPDTER_ID" jdbcType="VARCHAR" property="updterId"/>
         <result column="UPDTER_NAME" jdbcType="VARCHAR" property="updterName"/>
@@ -21,7 +21,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     USER_ID, USERNAME, GENDER, BITRH, TEL, EMAIL, AVATAR_URL, STATUS, CRTE_APP_ID, CRTE_TYPE, 
-    CRTOR_ID, CRTOR_NAME, CRTE_TIME, UPDTER_ID, UPDTER_NAME, UPDT_TIME
+    CRTER_ID, CRTER_NAME, CRTE_TIME, UPDTER_ID, UPDTER_NAME, UPDT_TIME
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -66,13 +66,13 @@
     insert into user_base (USER_ID, USERNAME, GENDER, 
       BITRH, TEL, EMAIL, AVATAR_URL, 
       STATUS, CRTE_APP_ID, CRTE_TYPE, 
-      CRTOR_ID, CRTOR_NAME, CRTE_TIME, 
+      CRTER_ID, CRTER_NAME, CRTE_TIME, 
       UPDTER_ID, UPDTER_NAME, UPDT_TIME
       )
     values (#{userId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, 
       #{bitrh,jdbcType=DATE}, #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR}, #{crteAppId,jdbcType=VARCHAR}, #{crteType,jdbcType=VARCHAR}, 
-      #{crtorId,jdbcType=VARCHAR}, #{crtorName,jdbcType=VARCHAR}, #{crteTime,jdbcType=TIMESTAMP}, 
+      #{crterId,jdbcType=VARCHAR}, #{crterName,jdbcType=VARCHAR}, #{crteTime,jdbcType=TIMESTAMP}, 
       #{updterId,jdbcType=VARCHAR}, #{updterName,jdbcType=VARCHAR}, #{updtTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -109,11 +109,11 @@
             <if test="crteType != null">
                 CRTE_TYPE,
             </if>
-            <if test="crtorId != null">
-                CRTOR_ID,
+            <if test="crterId != null">
+                CRTER_ID,
             </if>
-            <if test="crtorName != null">
-                CRTOR_NAME,
+            <if test="crterName != null">
+                CRTER_NAME,
             </if>
             <if test="crteTime != null">
                 CRTE_TIME,
@@ -159,11 +159,11 @@
             <if test="crteType != null">
                 #{crteType,jdbcType=VARCHAR},
             </if>
-            <if test="crtorId != null">
-                #{crtorId,jdbcType=VARCHAR},
+            <if test="crterId != null">
+                #{crterId,jdbcType=VARCHAR},
             </if>
-            <if test="crtorName != null">
-                #{crtorName,jdbcType=VARCHAR},
+            <if test="crterName != null">
+                #{crterName,jdbcType=VARCHAR},
             </if>
             <if test="crteTime != null">
                 #{crteTime,jdbcType=TIMESTAMP},
@@ -209,11 +209,11 @@
             <if test="crteType != null">
                 CRTE_TYPE = #{crteType,jdbcType=VARCHAR},
             </if>
-            <if test="crtorId != null">
-                CRTOR_ID = #{crtorId,jdbcType=VARCHAR},
+            <if test="crterId != null">
+                CRTER_ID = #{crterId,jdbcType=VARCHAR},
             </if>
-            <if test="crtorName != null">
-                CRTOR_NAME = #{crtorName,jdbcType=VARCHAR},
+            <if test="crterName != null">
+                CRTER_NAME = #{crterName,jdbcType=VARCHAR},
             </if>
             <if test="crteTime != null">
                 CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
@@ -241,8 +241,8 @@
       STATUS = #{status,jdbcType=VARCHAR},
       CRTE_APP_ID = #{crteAppId,jdbcType=VARCHAR},
       CRTE_TYPE = #{crteType,jdbcType=VARCHAR},
-      CRTOR_ID = #{crtorId,jdbcType=VARCHAR},
-      CRTOR_NAME = #{crtorName,jdbcType=VARCHAR},
+      CRTER_ID = #{crterId,jdbcType=VARCHAR},
+      CRTER_NAME = #{crterName,jdbcType=VARCHAR},
       CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
       UPDTER_ID = #{updterId,jdbcType=VARCHAR},
       UPDTER_NAME = #{updterName,jdbcType=VARCHAR},

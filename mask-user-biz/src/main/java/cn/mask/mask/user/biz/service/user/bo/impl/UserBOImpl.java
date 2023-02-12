@@ -36,7 +36,7 @@ public class UserBOImpl implements IUserBO {
      * 批量查询用户信息
      *
      * @param qUserBaseDTO {@link QUserBaseDTO} 查询信息
-     * @return {@link UserPO} 用户信息
+     * @return {@link UserBasePO} 用户信息
      * @throws MaskException e
      */
     @Override
@@ -56,8 +56,8 @@ public class UserBOImpl implements IUserBO {
     private UserBasePO packUserPO(UserBaseInfoDTO userBaseInfoDTO, RegisterInfoDTO registerInfoDTO) {
         UserBasePO userBasePO = new UserBasePO();
         BeanUtils.copyProperties(userBaseInfoDTO, userBasePO);
-        userBasePO.setCrtorId(userBaseInfoDTO.getUserId());
-        userBasePO.setCrtorName(userBaseInfoDTO.getUsername());
+        userBasePO.setCrterId(userBaseInfoDTO.getUserId());
+        userBasePO.setCrterName(userBaseInfoDTO.getUsername());
         userBasePO.setStatus(CommonConstant.USER_STATUS_NORMAL);
         userBasePO.setCrteAppId(registerInfoDTO.getRegAppId());
         userBasePO.setCrteType(registerInfoDTO.getRegType().getType());

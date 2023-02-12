@@ -1,8 +1,12 @@
 package cn.mask.mask.user.biz.service.useridentity.pojo.po;
 
-import java.util.Date;
+import cn.mask.mask.model.BasePO;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-public class UserIdentityPO {
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class UserIdentityPO extends BasePO {
     private String userId;
 
     private String identifyType;
@@ -14,18 +18,6 @@ public class UserIdentityPO {
     private String credential;
 
     private String salt;
-
-    private String crterId;
-
-    private Date crteTime;
-
-    private String updterId;
-
-    private String updterName;
-
-    private Date updtTime;
-
-    private byte[] crterName;
 
     public String getUserId() {
         return userId;
@@ -73,53 +65,5 @@ public class UserIdentityPO {
 
     public void setSalt(String salt) {
         this.salt = salt == null ? null : salt.trim();
-    }
-
-    public String getCrterId() {
-        return crterId;
-    }
-
-    public void setCrterId(String crterId) {
-        this.crterId = crterId == null ? null : crterId.trim();
-    }
-
-    public Date getCrteTime() {
-        return crteTime;
-    }
-
-    public void setCrteTime(Date crteTime) {
-        this.crteTime = crteTime;
-    }
-
-    public String getUpdterId() {
-        return updterId;
-    }
-
-    public void setUpdterId(String updterId) {
-        this.updterId = updterId == null ? null : updterId.trim();
-    }
-
-    public String getUpdterName() {
-        return updterName;
-    }
-
-    public void setUpdterName(String updterName) {
-        this.updterName = updterName == null ? null : updterName.trim();
-    }
-
-    public Date getUpdtTime() {
-        return updtTime;
-    }
-
-    public void setUpdtTime(Date updtTime) {
-        this.updtTime = updtTime;
-    }
-
-    public byte[] getCrterName() {
-        return crterName;
-    }
-
-    public void setCrterName(byte[] crterName) {
-        this.crterName = crterName;
     }
 }

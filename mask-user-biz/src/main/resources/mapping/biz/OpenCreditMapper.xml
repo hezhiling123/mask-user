@@ -12,8 +12,8 @@
         <result column="EXPIRES_IN" jdbcType="VARCHAR" property="expiresIn"/>
         <result column="ACCESS_TOKEN" jdbcType="VARCHAR" property="accessToken"/>
         <result column="RE_EXPIRES_IN" jdbcType="VARCHAR" property="reExpiresIn"/>
-        <result column="CRTOR_ID" jdbcType="VARCHAR" property="crtorId"/>
-        <result column="CRTOR_NAME" jdbcType="VARCHAR" property="crtorName"/>
+        <result column="CRTER_ID" jdbcType="VARCHAR" property="crterId"/>
+        <result column="CRTER_NAME" jdbcType="VARCHAR" property="crterName"/>
         <result column="CRTE_TIME" jdbcType="TIMESTAMP" property="crteTime"/>
         <result column="UPDTER_ID" jdbcType="VARCHAR" property="updterId"/>
         <result column="UPDTER_NAME" jdbcType="VARCHAR" property="updterName"/>
@@ -21,7 +21,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     ID, USER_ID, USER_NAME, OPEN_ID, BIND_TYPE, PHONE, REFRESH_TOKEN, EXPIRES_IN, ACCESS_TOKEN, 
-    RE_EXPIRES_IN, CRTOR_ID, CRTOR_NAME, CRTE_TIME, UPDTER_ID, UPDTER_NAME, UPDT_TIME
+    RE_EXPIRES_IN, CRTER_ID, CRTER_NAME, CRTE_TIME, UPDTER_ID, UPDTER_NAME, UPDT_TIME
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -55,13 +55,13 @@
     insert into open_credit_d (ID, USER_ID, USER_NAME, 
       OPEN_ID, BIND_TYPE, PHONE, 
       REFRESH_TOKEN, EXPIRES_IN, ACCESS_TOKEN, 
-      RE_EXPIRES_IN, CRTOR_ID, CRTOR_NAME, 
+      RE_EXPIRES_IN, CRTER_ID, CRTER_NAME, 
       CRTE_TIME, UPDTER_ID, UPDTER_NAME, 
       UPDT_TIME)
     values (#{id,jdbcType=CHAR}, #{userId,jdbcType=CHAR}, #{userName,jdbcType=VARCHAR}, 
       #{openId,jdbcType=VARCHAR}, #{bindType,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{refreshToken,jdbcType=VARCHAR}, #{expiresIn,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR}, 
-      #{reExpiresIn,jdbcType=VARCHAR}, #{crtorId,jdbcType=VARCHAR}, #{crtorName,jdbcType=VARCHAR}, 
+      #{reExpiresIn,jdbcType=VARCHAR}, #{crterId,jdbcType=VARCHAR}, #{crterName,jdbcType=VARCHAR}, 
       now(), #{updterId,jdbcType=VARCHAR}, #{updterName,jdbcType=VARCHAR},
       #{updtTime,jdbcType=TIMESTAMP})
   </insert>
@@ -98,11 +98,11 @@
             <if test="reExpiresIn != null">
                 RE_EXPIRES_IN,
             </if>
-            <if test="crtorId != null">
-                CRTOR_ID,
+            <if test="crterId != null">
+                CRTER_ID,
             </if>
-            <if test="crtorName != null">
-                CRTOR_NAME,
+            <if test="crterName != null">
+                CRTER_NAME,
             </if>
             <if test="crteTime != null">
                 CRTE_TIME,
@@ -148,11 +148,11 @@
             <if test="reExpiresIn != null">
                 #{reExpiresIn,jdbcType=VARCHAR},
             </if>
-            <if test="crtorId != null">
-                #{crtorId,jdbcType=VARCHAR},
+            <if test="crterId != null">
+                #{crterId,jdbcType=VARCHAR},
             </if>
-            <if test="crtorName != null">
-                #{crtorName,jdbcType=VARCHAR},
+            <if test="crterName != null">
+                #{crterName,jdbcType=VARCHAR},
             </if>
             <if test="crteTime != null">
                 #{crteTime,jdbcType=TIMESTAMP},
@@ -198,11 +198,11 @@
             <if test="reExpiresIn != null">
                 RE_EXPIRES_IN = #{reExpiresIn,jdbcType=VARCHAR},
             </if>
-            <if test="crtorId != null">
-                CRTOR_ID = #{crtorId,jdbcType=VARCHAR},
+            <if test="crterId != null">
+                CRTER_ID = #{crterId,jdbcType=VARCHAR},
             </if>
-            <if test="crtorName != null">
-                CRTOR_NAME = #{crtorName,jdbcType=VARCHAR},
+            <if test="crterName != null">
+                CRTER_NAME = #{crterName,jdbcType=VARCHAR},
             </if>
             <if test="crteTime != null">
                 CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
@@ -230,8 +230,8 @@
       EXPIRES_IN = #{expiresIn,jdbcType=VARCHAR},
       ACCESS_TOKEN = #{accessToken,jdbcType=VARCHAR},
       RE_EXPIRES_IN = #{reExpiresIn,jdbcType=VARCHAR},
-      CRTOR_ID = #{crtorId,jdbcType=VARCHAR},
-      CRTOR_NAME = #{crtorName,jdbcType=VARCHAR},
+      CRTER_ID = #{crterId,jdbcType=VARCHAR},
+      CRTER_NAME = #{crterName,jdbcType=VARCHAR},
       CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
       UPDTER_ID = #{updterId,jdbcType=VARCHAR},
       UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
