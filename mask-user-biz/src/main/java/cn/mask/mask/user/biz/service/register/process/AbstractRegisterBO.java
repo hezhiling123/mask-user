@@ -78,7 +78,7 @@ public abstract class AbstractRegisterBO implements RegisterBO {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void saveUserBaseInfo(UserBaseInfoDTO userBaseInfoDTO, RegisterInfoDTO registerInfoDTO) throws MaskException {
         userBO.addUser(userBaseInfoDTO, registerInfoDTO);
     }
@@ -86,15 +86,15 @@ public abstract class AbstractRegisterBO implements RegisterBO {
     /**
      * 存储用户绑定信息
      *
-     * @param openCreditPO {@link IOpenCreditBO} 用户绑定信息
+     * @param openCreditPO {@link OpenCreditPO} 用户绑定信息
      * @throws MaskException e
      */
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void saveOpenCredit(OpenCreditPO openCreditPO) throws MaskException {
         openCreditBO.saveOpenCredit(openCreditPO);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void saveUserIdentityInfo(UserIdentityPO userIdentityPO) throws MaskException {
         userIdentityBO.insertUserIdentity(userIdentityPO);
     }
