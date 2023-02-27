@@ -5,6 +5,7 @@ import cn.mask.mask.common.core.framework.web.enums.ResultCode;
 import cn.mask.mask.common.core.framework.web.exception.MaskException;
 import cn.mask.mask.user.api.register.dto.RegisterDTO;
 import cn.mask.mask.user.api.register.dto.RegisterResultDTO;
+import cn.mask.mask.user.api.register.dto.UserBaseDTO;
 import cn.mask.mask.user.api.register.dto.weixin.WeiXinRegisterDTO;
 import cn.mask.mask.user.api.register.enums.RegTypeEnum;
 import cn.mask.mask.user.biz.service.register.process.AbstractRegisterBO;
@@ -47,16 +48,15 @@ public class WeiXinRegisterBOImpl extends AbstractRegisterBO implements Register
     @Transactional(rollbackFor = Exception.class)
     public RegisterResultDTO registerByWeiXin(WeiXinRegisterDTO weiXinRegisterDTO) throws MaskException {
         checkRegisterData(weiXinRegisterDTO);
-        String userId = super.generateUserId();
-        weiXinRegisterDTO.getUserBaseInfo().setUserId(userId);
-        super.saveUserBaseInfo(weiXinRegisterDTO.getUserBaseInfo(), weiXinRegisterDTO.getRegisterInfo());
+        System.out.println("调用一次");
+        UserBaseDTO userBaseDTO = super.saveUserBaseInfo(weiXinRegisterDTO.getUserBaseInfo(), weiXinRegisterDTO.getRegisterInfo());
+        weiXinRegisterDTO.setUserBaseInfo(userBaseDTO);
         OpenCreditPO openCreditPO = initOpenCreditParams(weiXinRegisterDTO);
         openCreditPO.setOpenId(weiXinRegisterDTO.getOpenId());
         openCreditPO.setBindType(getRegTypeEnum().getType());
         super.saveOpenCredit(openCreditPO);
         RegisterResultDTO registerResultDTO = new RegisterResultDTO();
-        registerResultDTO.setUserId(userId);
-        registerResultDTO.setUserName(weiXinRegisterDTO.getUserBaseInfo().getNickName());
+        registerResultDTO.setUserBaseDTO(userBaseDTO);
         return registerResultDTO;
     }
 

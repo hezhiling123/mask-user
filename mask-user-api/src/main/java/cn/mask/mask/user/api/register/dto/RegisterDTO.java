@@ -17,7 +17,7 @@ public class RegisterDTO implements Serializable {
      * 用户基本信息
      */
     @Valid
-    UserBaseInfoDTO userBaseInfo;
+    UserBaseDTO userBaseInfo;
 
     /**
      * 注册信息

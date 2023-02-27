@@ -7,7 +7,7 @@ import cn.mask.mask.common.core.framework.web.WrapperResponse;
 import cn.mask.mask.common.core.framework.web.enums.ResultCode;
 import cn.mask.mask.common.core.framework.web.exception.MaskException;
 import cn.mask.mask.user.api.login.dto.WeiXinUserInfo;
-import cn.mask.mask.user.api.register.dto.UserBaseInfoDTO;
+import cn.mask.mask.user.api.register.dto.UserBaseDTO;
 import cn.mask.mask.user.api.register.enums.RegTypeEnum;
 import cn.mask.mask.user.api.user.dto.QUserDTO;
 import cn.mask.mask.user.api.user.service.IUserService;
@@ -62,32 +62,32 @@ public class UserServiceImpl implements IUserService {
      * @return 用户信息 {@link WeiXinUserInfo}
      */
     @Override
-    public WrapperResponse<UserBaseInfoDTO> getUserByUserId(String userId) throws MaskException {
+    public WrapperResponse<UserBaseDTO> getUserByUserId(String userId) throws MaskException {
         QUserBaseDTO qUserBaseDTO = new QUserBaseDTO();
         qUserBaseDTO.setUserId(userId);
         List<UserBasePO> userBasePOList = userBO.listUser(qUserBaseDTO);
-        UserBaseInfoDTO userBaseInfoDTO = new UserBaseInfoDTO();
-        BeanUtils.copyProperties(userBasePOList.get(0), userBaseInfoDTO);
-        return WrapperResponse.success(userBaseInfoDTO);
+        UserBaseDTO userBaseDTO = new UserBaseDTO();
+        BeanUtils.copyProperties(userBasePOList.get(0), userBaseDTO);
+        return WrapperResponse.success(userBaseDTO);
     }
 
     /**
      * 模糊查询用户信息
      *
      * @param qUserDTO {@link QUserDTO}
-     * @return {@link UserBaseInfoDTO}
+     * @return {@link UserBaseDTO}
      */
     @Override
     @PostMapping("/queryUserByCondition")
-    public WrapperResponse<UserBaseInfoDTO> queryUserByCondition(@RequestBody QUserDTO qUserDTO) throws MaskException {
+    public WrapperResponse<UserBaseDTO> queryUserByCondition(@RequestBody QUserDTO qUserDTO) throws MaskException {
         checkQueryUserInputCondition(qUserDTO);
         QUserBaseDTO qUserBaseDTO = new QUserBaseDTO();
         BeanUtils.copyProperties(qUserDTO, qUserBaseDTO);
         List<UserBasePO> userBasePOList = userBO.listUser(qUserBaseDTO);
         if (ObjectUtil.isNotEmpty(userBasePOList)) {
-            UserBaseInfoDTO userBaseInfoDTO = new UserBaseInfoDTO();
-            BeanUtils.copyProperties(userBasePOList.get(0), userBaseInfoDTO);
-            return WrapperResponse.success(userBaseInfoDTO);
+            UserBaseDTO userBaseDTO = new UserBaseDTO();
+            BeanUtils.copyProperties(userBasePOList.get(0), userBaseDTO);
+            return WrapperResponse.success(userBaseDTO);
         }
         if (!RegTypeEnum.checkType(qUserDTO.getBindType())) {
             throw new MaskException(ResultCode.REQUEST_PARAMETER_ERR, "绑定类型错误");
@@ -102,9 +102,11 @@ public class UserServiceImpl implements IUserService {
         QUserBaseDTO qUserBaseById = new QUserBaseDTO();
         qUserBaseById.setUserId(openCreditPOS.get(0).getUserId());
         List<UserBasePO> userBasePOByUserIdList = userBO.listUser(qUserBaseDTO);
-        UserBaseInfoDTO userBaseInfoDTO = new UserBaseInfoDTO();
-        BeanUtils.copyProperties(userBasePOByUserIdList.get(0), userBaseInfoDTO);
-        return WrapperResponse.success(userBaseInfoDTO);
+        UserBaseDTO userBaseDTO = new UserBaseDTO();
+        if (CollectionUtil.isNotEmpty(userBasePOByUserIdList)) {
+            BeanUtils.copyProperties(userBasePOByUserIdList.get(0), userBaseDTO);
+        }
+        return WrapperResponse.success(userBaseDTO);
     }
 
     /**

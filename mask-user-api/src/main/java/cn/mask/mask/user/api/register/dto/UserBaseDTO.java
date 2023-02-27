@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author hezhiling
@@ -12,7 +13,7 @@ import java.io.Serializable;
  * @date 2022-07-24 16:29:00
  */
 @Data
-public class UserBaseInfoDTO implements Serializable {
+public class UserBaseDTO implements Serializable {
     private static final long serialVersionUID = 8240637774399566L;
     /**
      * 用户id
@@ -70,4 +71,34 @@ public class UserBaseInfoDTO implements Serializable {
      * 城市
      */
     private String city;
+
+    /**
+     * 创建者ID
+     */
+    private String crterId;
+
+    /**
+     * 创建人姓名
+     */
+    private String crterName;
+
+    /**
+     * 创建时间
+     */
+    private Date crteTime;
+
+    /**
+     * 更新者ID
+     */
+    private String updterId;
+
+    /**
+     * 更新者名称
+     */
+    private String updterName;
+
+    /**
+     * 更新时间
+     */
+    private Date updtTime;
 }

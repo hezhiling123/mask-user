@@ -1,0 +1,63 @@
+package cn.mask.mask.user.biz.common.config.idgenerator;
+
+
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
+/**
+ * 单据号生成器
+ * Created by Ray on 2017/2/17.
+ */
+@Service
+public class SequenceGenerator {
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
+
+    protected final static String CACHEKEY_PREFIX = "mask:user:seq:";
+
+    /**
+     * Get next string.
+     *
+     * @param seqName the seqName
+     * @return the string
+     */
+    public String getNext(String seqName) {
+        return getNext(seqName, 0);
+    }
+
+    /**
+     * Get next string.
+     *
+     * @param seqName the seqName
+     * @param digits  the digits 序列的位数
+     * @return the string
+     */
+    public String getNext(String seqName, int digits) {
+        StringBuilder pattern = new StringBuilder();
+        if (digits > 0) {
+            for (int i = 0; i < digits; i++) {
+                pattern.append("0");
+            }
+        } else {
+            pattern = new StringBuilder("000");
+        }
+        NumberFormat nf = new DecimalFormat(pattern.toString());
+        return nf.format(redisTemplate.opsForValue().increment(CACHEKEY_PREFIX + seqName, -1));
+    }
+
+    /**
+     * Get next string.
+     *
+     * @param seqName the seqName 序列的名称
+     * @param prefix  the prefix
+     * @param digits  the digits 序列的位数
+     * @return the string
+     */
+    public String getNext(String seqName, String prefix, int digits) {
+        return prefix + getNext(seqName, digits);
+    }
+}

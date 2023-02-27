@@ -5,7 +5,7 @@ import cn.mask.mask.common.core.framework.web.enums.ResultCode;
 import cn.mask.mask.common.core.framework.web.exception.MaskException;
 import cn.mask.mask.user.api.register.dto.RegisterDTO;
 import cn.mask.mask.user.api.register.dto.RegisterInfoDTO;
-import cn.mask.mask.user.api.register.dto.UserBaseInfoDTO;
+import cn.mask.mask.user.api.register.dto.UserBaseDTO;
 import cn.mask.mask.user.biz.service.user.pojo.dto.QUserBaseDTO;
 import cn.mask.mask.user.biz.service.useridentity.bo.UserIdentityBO;
 import cn.mask.mask.user.biz.service.user.bo.IUserBO;
@@ -79,8 +79,8 @@ public abstract class AbstractRegisterBO implements RegisterBO {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void saveUserBaseInfo(UserBaseInfoDTO userBaseInfoDTO, RegisterInfoDTO registerInfoDTO) throws MaskException {
-        userBO.addUser(userBaseInfoDTO, registerInfoDTO);
+    public UserBaseDTO saveUserBaseInfo(UserBaseDTO userBaseDTO, RegisterInfoDTO registerInfoDTO) throws MaskException {
+        return userBO.addUser(userBaseDTO, registerInfoDTO);
     }
 
     /**
@@ -97,15 +97,6 @@ public abstract class AbstractRegisterBO implements RegisterBO {
     @Transactional(rollbackFor = Exception.class)
     public void saveUserIdentityInfo(UserIdentityPO userIdentityPO) throws MaskException {
         userIdentityBO.insertUserIdentity(userIdentityPO);
-    }
-
-    /**
-     * 生成用户id
-     *
-     * @return 用户id
-     */
-    public String generateUserId() {
-        return String.valueOf(defaultUidGenerator.getUID());
     }
 
     /**

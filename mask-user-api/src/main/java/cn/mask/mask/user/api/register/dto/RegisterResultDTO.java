@@ -12,16 +12,9 @@ import java.io.Serializable;
 @Data
 public class RegisterResultDTO implements Serializable {
     private static final long serialVersionUID = -8938664700755238217L;
+
     /**
-     * 用户id
+     * 用户基本信息
      */
-    private String userId;
-    /**
-     * 用户名称
-     */
-    private String userName;
-    /**
-     * 手机号
-     */
-    private String phone;
+    private UserBaseDTO userBaseDTO;
 }

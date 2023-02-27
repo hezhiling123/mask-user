@@ -2,7 +2,7 @@ package cn.mask.mask.user.biz.service.user.bo;
 
 import cn.mask.mask.common.core.framework.web.exception.MaskException;
 import cn.mask.mask.user.api.register.dto.RegisterInfoDTO;
-import cn.mask.mask.user.api.register.dto.UserBaseInfoDTO;
+import cn.mask.mask.user.api.register.dto.UserBaseDTO;
 import cn.mask.mask.user.biz.service.user.pojo.dto.QUserBaseDTO;
 import cn.mask.mask.user.biz.service.user.pojo.po.UserBasePO;
 
@@ -12,10 +12,11 @@ public interface IUserBO {
     /**
      * 添加用户基本信息
      *
-     * @param userBaseInfoDTO {@link UserBaseInfoDTO}
+     *
+     * @param userBaseDTO {@link UserBaseDTO}
      * @throws MaskException    e
      */
-    void addUser(UserBaseInfoDTO userBaseInfoDTO, RegisterInfoDTO registerInfoDTO) throws MaskException;
+    UserBaseDTO addUser(UserBaseDTO userBaseDTO, RegisterInfoDTO registerInfoDTO) throws MaskException;
 
     /**
      * 批量查询用户信息

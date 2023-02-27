@@ -1,19 +1,24 @@
 package cn.mask.mask.user.biz.service.user.bo.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.mask.mask.common.core.framework.web.enums.ResultCode;
 import cn.mask.mask.common.core.framework.web.exception.MaskException;
 import cn.mask.mask.user.api.register.dto.RegisterInfoDTO;
-import cn.mask.mask.user.api.register.dto.UserBaseInfoDTO;
+import cn.mask.mask.user.api.register.dto.UserBaseDTO;
+import cn.mask.mask.user.biz.common.config.idgenerator.SequenceGenerator;
 import cn.mask.mask.user.biz.common.constant.CommonConstant;
 import cn.mask.mask.user.biz.service.user.bo.IUserBO;
 import cn.mask.mask.user.biz.service.user.dao.UserBaseMapper;
 import cn.mask.mask.user.biz.service.user.pojo.dto.QUserBaseDTO;
 import cn.mask.mask.user.biz.service.user.pojo.po.UserBasePO;
+import com.baidu.fsg.uid.impl.DefaultUidGenerator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,11 +30,19 @@ import java.util.List;
 public class UserBOImpl implements IUserBO {
 
     @Resource
-    UserBaseMapper userBaseMapper;
+    private UserBaseMapper userBaseMapper;
+
+    @Resource
+    private SequenceGenerator sequenceGenerator;
+
+    @Resource
+    private DefaultUidGenerator defaultUidGenerator;
 
     @Override
-    public void addUser(UserBaseInfoDTO userBaseInfoDTO, RegisterInfoDTO registerInfoDTO) {
-        userBaseMapper.insert(packUserPO(userBaseInfoDTO, registerInfoDTO));
+    public UserBaseDTO addUser(UserBaseDTO userBaseDTO, RegisterInfoDTO registerInfoDTO) {
+        UserBasePO userBasePO = packUserPO(userBaseDTO, registerInfoDTO);
+        userBaseMapper.insert(userBasePO);
+        return BeanUtil.copyProperties(userBasePO, UserBaseDTO.class);
     }
 
     /**
@@ -44,23 +57,37 @@ public class UserBOImpl implements IUserBO {
         if (ObjectUtil.isNull(qUserBaseDTO)) {
             throw new MaskException(ResultCode.NULL_REQUIRED_PARAMETER, "查询用户基本信息时，请传入至少一项必填参数");
         }
-        return userBaseMapper.listUserByQUserBaseDTO(qUserBaseDTO);
+        List<UserBasePO> userBasePOList = userBaseMapper.listUserByQUserBaseDTO(qUserBaseDTO);
+        return new ArrayList<>(userBasePOList);
     }
 
     /**
      * 装配UserPO
      *
-     * @param userBaseInfoDTO {@link UserBaseInfoDTO} 用户基本信息，
+     * @param userBaseDTO {@link UserBaseDTO} 用户基本信息，
      * @return {@link UserBasePO}
      */
-    private UserBasePO packUserPO(UserBaseInfoDTO userBaseInfoDTO, RegisterInfoDTO registerInfoDTO) {
+    private UserBasePO packUserPO(UserBaseDTO userBaseDTO, RegisterInfoDTO registerInfoDTO) {
         UserBasePO userBasePO = new UserBasePO();
-        BeanUtils.copyProperties(userBaseInfoDTO, userBasePO);
-        userBasePO.setCrterId(userBaseInfoDTO.getUserId());
-        userBasePO.setCrterName(userBaseInfoDTO.getUsername());
+        userBaseDTO.setUserId(generateUserId());
+        BeanUtils.copyProperties(userBaseDTO, userBasePO);
+        userBasePO.setCrterId(userBaseDTO.getUserId());
+        userBasePO.setCrterName(userBaseDTO.getUsername());
         userBasePO.setStatus(CommonConstant.USER_STATUS_NORMAL);
         userBasePO.setCrteAppId(registerInfoDTO.getRegAppId());
         userBasePO.setCrteType(registerInfoDTO.getRegType().getType());
+        userBasePO.setUpdterId(userBaseDTO.getUserId());
+        userBasePO.setUsername(userBaseDTO.getUsername());
+        userBasePO.setUpdtTime(new Date());
         return userBasePO;
+    }
+
+    /**
+     * 生成用户id
+     *
+     * @return 用户id
+     */
+    public String generateUserId() {
+        return String.valueOf(sequenceGenerator.getNext("userId", 8));
     }
 }

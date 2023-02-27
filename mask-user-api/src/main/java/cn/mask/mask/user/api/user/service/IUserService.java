@@ -3,7 +3,7 @@ package cn.mask.mask.user.api.user.service;
 import cn.mask.mask.common.core.framework.web.WrapperResponse;
 import cn.mask.mask.common.core.framework.web.exception.MaskException;
 import cn.mask.mask.user.api.login.dto.WeiXinUserInfo;
-import cn.mask.mask.user.api.register.dto.UserBaseInfoDTO;
+import cn.mask.mask.user.api.register.dto.UserBaseDTO;
 import cn.mask.mask.user.api.user.dto.QUserDTO;
 
 /**
@@ -23,12 +23,12 @@ public interface IUserService {
      * @param userId    用户id
      * @return  用户信息 {@link WeiXinUserInfo}
      */
-    WrapperResponse<UserBaseInfoDTO> getUserByUserId(String userId) throws MaskException;
+    WrapperResponse<UserBaseDTO> getUserByUserId(String userId) throws MaskException;
 
     /**
      * 模糊查询用户信息
      * @param qUserDTO  {@link QUserDTO}
-     * @return {@link UserBaseInfoDTO}
+     * @return {@link UserBaseDTO}
      */
-    WrapperResponse<UserBaseInfoDTO> queryUserByCondition(QUserDTO qUserDTO) throws MaskException;
+    WrapperResponse<UserBaseDTO> queryUserByCondition(QUserDTO qUserDTO) throws MaskException;
 }
