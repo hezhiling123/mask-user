@@ -176,11 +176,22 @@
             <properties>
                 <!-- 环境标识，需要与配置文件的名称相对应 -->
                 <profiles.active>dev</profiles.active>
+                <nacos.namespace>86381884-86d1-481e-8c08-c92d6ef1e80e</nacos.namespace>
+                <nacos.config.access-key>nacos</nacos.config.access-key>
+                <nacos.config.secret-key>nacos</nacos.config.secret-key>
             </properties>
             <activation>
                 <!-- 默认环境 -->
                 <activeByDefault>true</activeByDefault>
             </activation>
+        </profile>
+        <profile>
+            <id>pro</id>
+            <properties>
+                <!-- 环境标识，需要与配置文件的名称相对应 -->
+                <profiles.active>pro</profiles.active>
+                <nacos.namespace>pro</nacos.namespace>
+            </properties>
         </profile>
     </profiles>
 </project>

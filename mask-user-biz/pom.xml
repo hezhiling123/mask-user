@@ -114,6 +114,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
         <!-- 流量防护组件sentinel-->
 <!--        <dependency>-->
 <!--            <groupId>com.alibaba.cloud</groupId>-->

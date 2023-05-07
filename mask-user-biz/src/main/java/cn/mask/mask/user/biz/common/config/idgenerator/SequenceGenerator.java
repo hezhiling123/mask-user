@@ -37,16 +37,7 @@ public class SequenceGenerator {
      * @return the string
      */
     public String getNext(String seqName, int digits) {
-        StringBuilder pattern = new StringBuilder();
-        if (digits > 0) {
-            for (int i = 0; i < digits; i++) {
-                pattern.append("0");
-            }
-        } else {
-            pattern = new StringBuilder("000");
-        }
-        NumberFormat nf = new DecimalFormat(pattern.toString());
-        return nf.format(redisTemplate.opsForValue().increment(CACHEKEY_PREFIX + seqName, -1));
+        return String.format("%0"+ digits + "d", redisTemplate.opsForValue().increment(CACHEKEY_PREFIX + seqName, 1));
     }
 
     /**

@@ -48,7 +48,6 @@ public class WeiXinRegisterBOImpl extends AbstractRegisterBO implements Register
     @Transactional(rollbackFor = Exception.class)
     public RegisterResultDTO registerByWeiXin(WeiXinRegisterDTO weiXinRegisterDTO) throws MaskException {
         checkRegisterData(weiXinRegisterDTO);
-        System.out.println("调用一次");
         UserBaseDTO userBaseDTO = super.saveUserBaseInfo(weiXinRegisterDTO.getUserBaseInfo(), weiXinRegisterDTO.getRegisterInfo());
         weiXinRegisterDTO.setUserBaseInfo(userBaseDTO);
         OpenCreditPO openCreditPO = initOpenCreditParams(weiXinRegisterDTO);
